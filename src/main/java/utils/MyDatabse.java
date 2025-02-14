@@ -5,7 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MyDatabse {
+<<<<<<< HEAD
    final String URL = "jdbc:mysql://localhost:3306/padelRadar";
+=======
+   final String URL = "jdbc:mysql://localhost:3307/padelRadar";
+>>>>>>> 0d7d319c8522df9b743469e316fcc962f832a3a6
 
   final   String USERNAME = "root";
 

@@ -1,4 +1,8 @@
 package model;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0d7d319c8522df9b743469e316fcc962f832a3a6
 import java.util.Date;
 
 public class abonnement {
