@@ -26,7 +26,7 @@ public class TournoiService implements IService<Tournoi> {
             pstmt.setString(1, tournoi.getTitre());
             pstmt.setString(2, tournoi.getDescription());
             pstmt.setInt(3, tournoi.getNbr());
-            pstmt.setDate(4, new java.sql.Date(tournoi.getDate().getTime())); // Convert Date to SQL Date
+            pstmt.setDate(4, new java.sql.Date(tournoi.getDate().getTime())); 
             pstmt.setString(5, tournoi.getTrophee());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -42,7 +42,7 @@ public class TournoiService implements IService<Tournoi> {
             pstmt.setString(1, tournoi.getTitre());
             pstmt.setString(2, tournoi.getDescription());
             pstmt.setInt(3, tournoi.getNbr());
-            pstmt.setDate(4, new java.sql.Date(tournoi.getDate().getTime())); // Convert Date to SQL Date
+            pstmt.setDate(4, new java.sql.Date(tournoi.getDate().getTime()));
             pstmt.setString(5, tournoi.getTrophee());
             pstmt.setInt(6, tournoi.getIdTournoi());
             pstmt.executeUpdate();

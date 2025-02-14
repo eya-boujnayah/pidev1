@@ -6,7 +6,7 @@ public class Tournoi {
     private int idTournoi;
     private String titre;
     private String description;
-    private int nbr; // Added nbr attribute
+    private int nbr;
     private Date date;
     private String trophee;
 
@@ -17,7 +17,7 @@ public class Tournoi {
         this.idTournoi = idTournoi;
         this.titre = titre;
         this.description = description;
-        this.nbr = nbr; // Assigning nbr value
+        this.nbr = nbr;
         this.date = date;
         this.trophee = trophee;
     }
@@ -25,7 +25,7 @@ public class Tournoi {
     public Tournoi(String titre, String description, int nbr, Date date, String trophee) {
         this.titre = titre;
         this.description = description;
-        this.nbr = nbr; // Assigning nbr value
+        this.nbr = nbr;
         this.date = date;
         this.trophee = trophee;
     }
@@ -55,11 +55,11 @@ public class Tournoi {
     }
 
     public int getNbr() {
-        return nbr; // Getter for nbr
+        return nbr;
     }
 
     public void setNbr(int nbr) {
-        this.nbr = nbr; // Setter for nbr
+        this.nbr = nbr;
     }
 
     public Date getDate() {
