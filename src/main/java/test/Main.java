@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-/*
+
         //************************* Produit ***********************************
 
 produit p = new  produit( "aa", "bb","cc","dd",20.35, 55,  "ee",85) ;
@@ -46,17 +46,27 @@ produit p = new  produit( "aa", "bb","cc","dd",20.35, 55,  "ee",85) ;
          produitService.update(produitU);
 
         System.out.println("\nProduit mis à jour avec succès.");
+//display
+        ProduitService produitService1 = new ProduitService();
+        List<produit> produits1 = produitService1.display();
 
+        for (produit pi : produits1) {
+            System.out.println(pi);
+        }
 
 //delete
         int idProduitASupprimer = 1;  // ID du produit à supprimer, assure-toi qu'il existe dans la base
         produitService.delete(idProduitASupprimer);
         System.out.println("\n Suppression effectuée pour le produit avec ID " + idProduitASupprimer);
 //display
-        for (produit pi : produits) {
+        //display
+        ProduitService produitService2 = new ProduitService();
+        List<produit> produits2 = produitService2.display();
+
+        for (produit pi : produits2) {
             System.out.println(pi);
         }
-    }*/
+
         //************************* Categorie ***********************************
 
 // Création d'une nouvelle catégorie
@@ -93,13 +103,22 @@ produit p = new  produit( "aa", "bb","cc","dd",20.35, 55,  "ee",85) ;
 
         System.out.println("\nCatégorie mise à jour avec succès.");
 
+        //display
+        CategorieService CategorieService1 = new CategorieService();
+        List<categorie> categories1 = CategorieService1.display();
+        for (categorie cat : categories1) {
+            System.out.println(cat);
+        }
+
 // Suppression d'une catégorie
-        int idCategorieASupprimer = 4;  // ID de la catégorie à supprimer, assure-toi qu'il existe dans la base
+        int idCategorieASupprimer = 29;  // ID de la catégorie à supprimer, assure-toi qu'il existe dans la base
         CategorieService.delete(idCategorieASupprimer);
         System.out.println("\nSuppression effectuée pour la catégorie avec ID " + idCategorieASupprimer);
 
 // Affichage des catégories après suppression
-        for (categorie cat : categories) {
+        CategorieService CategorieService2 = new CategorieService();
+        List<categorie> categories2 = CategorieService2.display();
+        for (categorie cat : categories2) {
             System.out.println(cat);
         }
 
