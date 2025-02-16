@@ -2,28 +2,83 @@ package model;
 
 public class produit {
     private int idProduit;
-    private String nom,description,status,marque;
+    private String reference;
+    private String nom;
+    private String description;
+    private String marque;
     private double prix;
     private int stock;
-    private int idCategorie;
     private String couleurs;
+    private String status;
+    private String imagepath;
+    private int idCategorie;
+
+    @Override
+    public String toString() {
+        return "produit{" +
+                "idProduit=" + idProduit +
+                ", reference='" + reference + '\'' +
+                ", nom='" + nom + '\'' +
+                ", description='" + description + '\'' +
+                ", marque='" + marque + '\'' +
+                ", prix=" + prix +
+                ", stock=" + stock +
+                ", couleurs='" + couleurs + '\'' +
+                ", status='" + status + '\'' +
+                ", imagepath='" + imagepath + '\'' +
+                ", idCategorie=" + idCategorie +
+                '}';
+    }
 
     public produit() {
     }
 
-    public produit(int idProduit, String nom, String description,String status,String marque, double prix, int stock, String couleurs,int idCategorie) {
+    public produit(int idProduit, String reference, String nom, String description, String marque, double prix, int stock, String couleurs, String status, String imagepath, int idCategorie) {
         this.idProduit = idProduit;
+        this.reference = reference;
+        this.nom = nom;
+        this.description = description;
+        this.marque = marque;
+        this.prix = prix;
+        this.stock = stock;
+        this.couleurs = couleurs;
+        this.status = status;
+        this.imagepath = imagepath;
+        this.idCategorie = idCategorie;
+    }
+
+    public produit(String reference, String nom, String description, double prix, String marque, int stock, String couleurs, String status, String imagepath, int idCategorie) {
+        this.reference = reference;
         this.nom = nom;
         this.description = description;
         this.prix = prix;
-        this.stock = stock;
-        this.idCategorie = idCategorie;
-        this.couleurs = couleurs;
         this.marque = marque;
+        this.stock = stock;
+        this.couleurs = couleurs;
         this.status = status;
-
+        this.imagepath = imagepath;
+        this.idCategorie = idCategorie;
     }
 
+    public produit(String reference, String nom, String description, String marque, double prix, int stock, String couleurs, String status, String imagepath) {
+        this.reference = reference;
+        this.nom = nom;
+        this.description = description;
+        this.marque = marque;
+        this.prix = prix;
+        this.stock = stock;
+        this.couleurs = couleurs;
+        this.status = status;
+        this.imagepath = imagepath;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
 
     public int getIdProduit() {
         return idProduit;
@@ -47,14 +102,6 @@ public class produit {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getMarque() {
@@ -81,14 +128,6 @@ public class produit {
         this.stock = stock;
     }
 
-    public int getIdCategorie() {
-        return idCategorie;
-    }
-
-    public void setIdCategorie(int idCategorie) {
-        this.idCategorie = idCategorie;
-    }
-
     public String getCouleurs() {
         return couleurs;
     }
@@ -97,31 +136,27 @@ public class produit {
         this.couleurs = couleurs;
     }
 
-    public produit(String nom, String description,String status,String marque, double prix, int stock, String couleurs,int idCategorie) {
-        this.nom = nom;
-        this.description = description;
-        this.prix = prix;
-        this.stock = stock;
-        this.idCategorie = idCategorie;
-        this.couleurs = couleurs;
-        this.marque = marque;
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
         this.status = status;
-
     }
 
-    @Override
-    public String toString() {
-        return "produit{" +
-                "idProduit=" + idProduit +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                ", marque='" + marque + '\'' +
-                ", prix=" + prix +
-                ", stock=" + stock +
-                ", idCategorie=" + idCategorie +
-                ", couleurs='" + couleurs + '\'' +
-                '}';
+    public int getIdCategorie() {
+        return idCategorie;
     }
 
+    public void setIdCategorie(int idCategorie) {
+        this.idCategorie = idCategorie;
+    }
 }

@@ -3,39 +3,40 @@ package model;
 import java.util.Date;
 
 public class categorie {
+
     private int idCategorie;
-    private String nom,description,status;
-private Date   date_creation;
+    private String reference;
+    private String nom;
+    private String description;
+    private Date dateCreation;  // Change type from `date` to `java.util.Date`
+
+    public categorie() {
+    }
+
+    public categorie(int idCategorie, String reference, String nom, String description, Date dateCreation) {
+        this.idCategorie = idCategorie;
+        this.reference = reference;
+        this.nom = nom;
+        this.description = description;
+        this.dateCreation = dateCreation;
+    }
+
+    public categorie(String reference, String nom, String description, Date dateCreation) {
+        this.reference = reference;
+        this.nom = nom;
+        this.description = description;
+        this.dateCreation = dateCreation;
+    }
 
     @Override
     public String toString() {
         return "categorie{" +
                 "idCategorie=" + idCategorie +
+                ", reference='" + reference + '\'' +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                ", date_creation=" + date_creation +
+                ", dateCreation=" + dateCreation +  // Corrected this line
                 '}';
-    }
-
-    public categorie() {
-    }
-
-
-    public categorie(int idCategorie, String nom, String description, String status, Date date_creation) {
-        this.idCategorie = idCategorie;
-        this.nom = nom;
-        this.description = description;
-        this.status = status;
-        this.date_creation = date_creation;
-
-    }
-    public categorie(String nom, String description, String status, Date date_creation) {
-         this.nom = nom;
-        this.description = description;
-        this.status = status;
-        this.date_creation = date_creation;
-
     }
 
     public int getIdCategorie() {
@@ -46,20 +47,20 @@ private Date   date_creation;
         this.idCategorie = idCategorie;
     }
 
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
     public String getNom() {
         return nom;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getDescription() {
@@ -70,11 +71,12 @@ private Date   date_creation;
         this.description = description;
     }
 
-    public Date getDate_creation() {
-        return date_creation;
+    public Date getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDate_creation(Date date_creation) {
-        this.date_creation = date_creation;
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
+
 }
