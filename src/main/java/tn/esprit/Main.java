@@ -30,23 +30,24 @@ public class Main {
             Date dateNaissance = dateFormat.parse("12/10/2001");
 
             // Création d'un utilisateur
-            User user = new User("Aidi", "Hatem", "hatemaidi09@gmail.com", "06021977", "92340748", "a", dateInscription, dateNaissance);
+            User user = new User("yyyy", "aaaa", "oussema@gmail.com", "06021977", "92340748", "a", dateInscription, dateNaissance);
 
             // Ajout de l'utilisateur
             userService.add(user);
             System.out.println("Utilisateur ajouté avec succès !");
 
             // Mise à jour de l'utilisateur
-            user.setNom("Aidi");
-            user.setPrenom("Oussema");
+            user.setIdUtilisateur(17);
+            user.setNom("xxxx");
+            user.setPrenom("aaaa");
             userService.update(user);
             System.out.println("Utilisateur mis à jour avec succès !");
 
             // Suppression de l'utilisateur avec l'ID 1
-            userService.delete(1);
+            userService.delete(17);
             System.out.println("\nUtilisateur avec l'ID 1 supprimé.");
 
-            // Parsing des dates pour les abonnements
+
             Date dateDebut = dateFormat.parse("01/03/2025");
             Date dateFin = dateFormat.parse("01/06/2025");
 
@@ -63,12 +64,12 @@ public class Main {
             abonnementService.update(abonnement);
             System.out.println("Abonnement mis à jour avec succès !");
 
-            // Suppression d'un abonnement avec l'ID 1
+
             abonnementService.delete(1);
             System.out.println("\nAbonnement avec l'ID 1 supprimé.");
 
         } catch (ParseException e) {
-            // Gestion des erreurs de format de date
+
             System.err.println("Erreur de format de date : " + e.getMessage());
         }
 
