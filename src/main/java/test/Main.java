@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         // Convert the string to a Date object
         Date dateCreation = dateFormat.parse("2022-02-16");

@@ -1,0 +1,112 @@
+/* ==============================
+  Styles pour les champs de texte (TextField)
+  ============================== */
+.text-field {
+    -fx-background-color:  #0A192F; /* Fond sombre comme TextArea */
+    -fx-border-color: #A6C36F; /* Bordure verte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff; /* Texte noir */
+    -fx-highlight-fill: #A6C36F; /* Couleur de sélection */
+    -fx-font-family: "Bell MT";
+    -fx-alignment: center;
+}
+
+/* Placeholder (texte d'invite) */
+.text-field .text {
+    -fx-text-fill: #D9D9D9; /* Gris clair */
+}
+
+
+
+/* ==============================
+   Styles pour les zones de texte (TextArea)
+   ============================== */
+.text-area {
+    -fx-background-color: #1E3A66; /* Fond sombre */
+    -fx-border-color: #A6C36F; /* Bordure verte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000; /* Texte noir */
+    -fx-highlight-fill: #A6C36F; /* Couleur de sélection */
+    -fx-font-family: "Bell MT";
+}
+
+/* Suppression du fond pour éviter une double coloration */
+.text-area .content {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+/* Placeholder pour TextArea */
+.text-area .prompt-text {
+    -fx-text-fill: #D9D9D9;
+}
+
+
+
+/* ==============================
+   Styles pour les boutons
+   ============================== */
+.button {
+    -fx-background-color: #B3D66D; /* Vert foncé */
+    -fx-border-color: #1E3A66; /* Bordure bleue */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 15px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #0A192F;
+    -fx-font-family: "Bell MT";
+    -fx-cursor: hand;
+    -fx-transition: 0.3s;
+}
+
+/* Effet au survol */
+.button:hover {
+    -fx-background-color: #6b81d0; /* Vert plus clair */
+    -fx-border-color: #2A4B80;
+    -fx-text-fill: white;
+}
+
+/* Effet lorsqu'on clique */
+.button:pressed {
+    -fx-background-color: #5a8c5a; /* Vert très foncé */
+    -fx-border-color: #162B4D;
+    -fx-text-fill: #0e0e0e;
+}
+
+/* Bouton désactivé */
+.button:disabled {
+    -fx-background-color: #A6C36F;
+    -fx-border-color: #8A8A8A;
+    -fx-text-fill: #BBBBBB;
+    -fx-opacity: 0.7;
+}
+
+/* ==============================
+   Styles pour les titres
+   ============================== */
+.title {
+    -fx-font-size: 35px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-family: "Bell MT";
+    -fx-alignment: center;
+    -fx-padding: 15px;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 0, 1);
+}
+/* Effet lorsque la zone de texte est focalisée */
+.text-area:focused {
+    -fx-border-color: #B3D66D;
+     -fx-text-fill: #0e0e0e;
+
+}
