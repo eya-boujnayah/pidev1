@@ -22,6 +22,7 @@
 
 
 
+
 /* ==============================
    Styles pour les zones de texte (TextArea)
    ============================== */
@@ -110,3 +111,81 @@
      -fx-text-fill: #0e0e0e;
 
 }
+/* ==============================
+   Styles pour le ListView
+   ============================== */
+.list-view {
+    -fx-background-color: #1E3A66; /* Fond sombre */
+    -fx-border-color: #A6C36F; /* Bordure verte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff; /* Texte blanc */
+    -fx-font-family: "Bell MT";
+}
+
+/* Style des éléments de la liste */
+.list-view .cell {
+    -fx-background-color: #1E3A66; /* Fond sombre pour chaque élément */
+    -fx-text-fill: #ffffff; /* Texte blanc */
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Bell MT";
+    -fx-alignment: center-left;
+}
+
+/* Effet au survol des éléments */
+.list-view .cell:hover {
+    -fx-background-color: #A6C36F; /* Fond vert clair au survol */
+    -fx-text-fill: #0A192F; /* Texte noir au survol */
+}
+
+/* Effet lorsque l'élément est sélectionné */
+.list-view .cell:selected {
+    -fx-background-color: #A6C36F; /* Fond vert clair pour l'élément sélectionné */
+    -fx-text-fill: #0A192F; /* Texte noir pour l'élément sélectionné */
+}
+
+/* Effet lorsque le ListView est focalisé */
+.list-view:focused {
+    -fx-border-color: #A6C36F; /* Bordure verte lors de la mise au point */
+}
+/* ==============================
+   Nouveau style pour les boutons d'action
+   ============================== */
+.action-button {
+    -fx-background-color: #4C6A8C; /* Bleu plus intense */
+    -fx-border-color: #1E3A66; /* Bordure bleue */
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px; /* Bordure plus arrondie */
+    -fx-background-radius: 15px; /* Arrondi pour le fond */
+    -fx-font-size: 16px; /* Taille du texte */
+    -fx-text-fill: #FFFFFF; /* Texte blanc */
+    -fx-font-family: "Bell MT";
+    -fx-cursor: hand;
+    -fx-transition: 0.3s;
+    -fx-alignment: center; /* Centrer le texte dans le bouton */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 0, 1); /* Ombre légère */
+    -fx-padding: 12px 24px; /* Padding: top/bottom 12px, left/right 24px */
+    -fx-pref-width: 1px; /* Largeur préférée */
+    -fx-pref-height: 50px; /* Hauteur préférée */
+
+}
+
+/* Effet au survol */
+.action-button:hover {
+    -fx-background-color: #5E7A9E; /* Bleu clair au survol */
+    -fx-border-color: #3A5D6A;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* Effet lorsqu'on clique */
+.action-button:pressed {
+    -fx-background-color: #2C4D6E; /* Bleu foncé lorsqu'on clique */
+    -fx-border-color: #0A192F;
+    -fx-text-fill: #FFFFFF;
+}
+
+

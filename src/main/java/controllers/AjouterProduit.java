@@ -7,6 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.Node;
 
 import model.produit;
 import service.IService;
@@ -16,6 +20,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
     public class AjouterProduit {
+
 
         @FXML
         private TextField categorie;
@@ -78,6 +83,27 @@ private IService ps = new ProduitService();
             imagepath.clear();
             categorie.clear();
         }
+        @FXML
+        void listproduit(ActionEvent event) {
+            try {
+                // Charger la scène de la liste des produits
+                Parent root = FXMLLoader.load(getClass().getResource("/TousLesProduits.fxml"));
+
+                // Créer une nouvelle scène
+                Scene scene = new Scene(root);
+
+                // Récupérer la fenêtre actuelle (Stage) et changer la scène
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de Chargement");
+                alert.setContentText("Il y a eu une erreur lors du chargement de la liste des produits.");
+                alert.showAndWait();
+            }
+        }
+
 
     }
 
