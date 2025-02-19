@@ -156,7 +156,7 @@
    Nouveau style pour les boutons d'action
    ============================== */
 .action-button {
-    -fx-background-color: #4C6A8C; /* Bleu plus intense */
+    -fx-background-color:  #1E3A66; /* Bleu plus intense */
     -fx-border-color: #1E3A66; /* Bordure bleue */
     -fx-border-width: 3px;
     -fx-border-radius: 15px; /* Bordure plus arrondie */

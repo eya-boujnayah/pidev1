@@ -9,13 +9,13 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TousLesProduits">
     <children>
-        <VBox alignment="CENTER" prefHeight="400" prefWidth="600" spacing="10">
-            <Label stylesheets="@style.css" text="Liste des Produits" textFill="#8cb4e4">
+        <VBox alignment="CENTER" prefHeight="400" prefWidth="600" spacing="10" style="-fx-background-color: #0A192F;">
+            <Label prefHeight="72.0" prefWidth="289.0" styleClass="title" stylesheets="@style.css" text="Liste des Produits" textAlignment="CENTER">
             <font>
                <Font name="Bell MT" size="40.0" />
             </font></Label>
 
-            <ListView fx:id="listViewProduits" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="550.0" stylesheets="@style.css">
+            <ListView fx:id="listViewProduits" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="279.0" prefWidth="541.0" stylesheets="@style.css">
             <styleClass>
                <String fx:value="tile-pane" />
                <String fx:value="list-view" />
