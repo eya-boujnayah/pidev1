@@ -188,4 +188,26 @@
     -fx-text-fill: #FFFFFF;
 }
 
+/* ==============================
+   Styles pour le texte normal (par défaut)
+   ============================== */
 
+.case{
+    -fx-font-size: 16px; /* Taille légèrement plus grande pour mettre en valeur la référence */
+    -fx-text-fill: #ffffff; /* Couleur verte pour faire ressortir la référence */
+    -fx-font-weight: bold; /* Texte en gras pour plus de visibilité */
+    -fx-font-family: "Bell MT"; /* Police cohérente avec le reste */
+    -fx-alignment:  left; /* Aligné à gauche */
+    -fx-background-color: transparent; /* Fond transparent pour garder l'attention sur le texte */
+}
+.title2 {
+    -fx-font-size: 35px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: #B3D66D;
+    -fx-font-family: "Bell MT";
+    -fx-alignment: center;
+    -fx-padding: 15px;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 0, 1);
+}

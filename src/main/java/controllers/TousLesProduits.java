@@ -1,7 +1,9 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
@@ -13,6 +15,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.produit;
 import service.ProduitService;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+
+ import java.io.IOException;
 
 public class TousLesProduits {
 
@@ -20,11 +27,12 @@ public class TousLesProduits {
     private ListView<produit> listViewProduits;
 
     private final ProduitService produitService = new ProduitService();
+    private ObservableList<produit> produits;
 
     @FXML
     public void initialize() {
-        // Charger les produits
-        ObservableList<produit> produits = FXCollections.observableArrayList(produitService.display());
+        // Initialiser l'ObservableList avec les produits existants
+        produits = FXCollections.observableArrayList(produitService.display());
         listViewProduits.setItems(produits);
 
         // Personnaliser l'affichage de chaque élément de la liste
@@ -35,25 +43,24 @@ public class TousLesProduits {
                 if (empty || produit == null) {
                     setGraphic(null);
                 } else {
-                    // Texte du produit
-                    Text productText = new Text(produit.getNom() + " :  " + produit.getDescription() +"  "+ produit.getImagepath());
-
-                    // Espace pour séparer le texte du bouton
+                    Text productText = new Text(produit.getNom() + " : " + produit.getDescription() + " " + produit.getImagepath());
                     Region spacer = new Region();
                     HBox.setHgrow(spacer, Priority.ALWAYS);
 
-                    // Bouton "Détails"
                     Button detailsButton = new Button("Détails");
                     detailsButton.setStyle("-fx-font-size: 12px; -fx-padding: 5px 0px;");
                     detailsButton.setPrefSize(80, 30);
                     detailsButton.setOnAction(event -> afficherDetails(produit));
 
-                    // Conteneur du bouton (HBox pour aligner à droite)
-                    HBox buttonContainer = new HBox(detailsButton);
+                    Button deleteButton = new Button("Supprimer");
+                    deleteButton.setStyle("-fx-font-size: 12px; -fx-padding: 5px 0px; -fx-background-color: red; -fx-text-fill: white;");
+                    deleteButton.setPrefSize(80, 30);
+                    deleteButton.setOnAction(event -> deleteProduit(produit));
+
+                    HBox buttonContainer = new HBox(10, detailsButton, deleteButton);
                     buttonContainer.setMaxWidth(Double.MAX_VALUE);
                     buttonContainer.setStyle("-fx-alignment: center-right;");
 
-                    // Conteneur principal (VBox pour empiler les éléments)
                     VBox vbox = new VBox(5, productText, buttonContainer);
                     vbox.setStyle("-fx-padding: 10px;");
 
@@ -64,7 +71,58 @@ public class TousLesProduits {
     }
 
     private void afficherDetails(produit produit) {
-        System.out.println("Détails du produit : " + produit.getNom());
-        // Ici, tu peux afficher une nouvelle fenêtre ou charger une autre vue avec les détails.
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsProduit.fxml"));
+            Scene detailsScene = new Scene(loader.load());
+            DetailsProduit controller = loader.getController();
+            controller.setProduit(produit);
+            Stage detailsStage = new Stage();
+            detailsStage.setTitle("Détails du produit");
+            detailsStage.setScene(detailsScene);
+            detailsStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    // Méthode pour supprimer un produit et mettre à jour la ListView
+    @FXML
+    void deleteProduit(produit produit) {
+        if (produit != null) {
+            produitService.delete(produit.getIdProduit());
+            Platform.runLater(() -> {
+                produits.remove(produit); // Suppression du produit directement dans la liste observable
+            });
+        }
+    }
+
+    // Méthode pour ajouter un produit et mettre à jour la ListView
+    @FXML
+    void addProduit(produit produit) {
+        if (produit != null) {
+            produitService.add(produit); // Ajout en base de données
+            Platform.runLater(() -> {
+                produits.add(produit); // Ajout du produit dans la liste observable
+            });
+        }
+    }
+    @FXML
+    void ReturnToAddProduit(ActionEvent event) {
+        try {
+            // Charger la scène de la page d'ajout de produit
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterProduit.fxml"));
+            Scene sceneAjout = new Scene(loader.load());
+
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow(); // Utilisation de l'événement pour récupérer le bouton
+            stage.setScene(sceneAjout); // Changer la scène
+            stage.show(); // Afficher la nouvelle scène
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 }
