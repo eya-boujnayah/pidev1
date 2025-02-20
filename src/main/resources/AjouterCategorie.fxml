@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A192F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterCategorie">
+    <children>
+        <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="186.0" layoutY="76.0" prefHeight="314.0" prefWidth="390.0" style="-fx-background-color: #1E3A66;" AnchorPane.bottomAnchor="22.0" AnchorPane.topAnchor="76.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <children>
+                <Group layoutX="195.0" layoutY="-50.0" translateY="40.0">
+                    <children>
+                        <TextField id="reference" fx:id="reference" alignment="TOP_CENTER" prefHeight="30.0" prefWidth="170.0" promptText="Reference de la Categorie" stylesheets="@style.css" translateX="-160.0" translateY="50.0">
+                            <font>
+                                <Font name="Bell MT" size="12.0" />
+                            </font>
+                        </TextField>
+                        <TextField id="nom" fx:id="nom" alignment="TOP_CENTER" prefHeight="30.0" prefWidth="170.0" promptText="Nom de la Categorie" stylesheets="@style.css" translateX="20.0" translateY="50.0">
+                            <font>
+                                <Font name="Bell MT" size="12.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                </Group>
+            <DatePicker id="datecreation" fx:id="datecreation" prefHeight="26.0" prefWidth="223.0" stylesheets="@style.css" translateY="65.0" />
+                <Group layoutX="195.0" layoutY="41.0" translateX="5.0" translateY="80.0">
+                    <children>
+                        <TextArea id="description" fx:id="description" prefHeight="99.0" prefWidth="228.0" promptText="Description de la Categorie" stylesheets="@style.css" translateX="20.0" translateY="80.0" />
+                    </children>
+                </Group>
+                <Button mnemonicParsing="false" onAction="#addCategorie" prefHeight="38.0" prefWidth="156.0" stylesheets="@style.css" text="Ajouter Categorie" translateY="90.0" />
+            </children>
+        </VBox>
+        <VBox layoutX="-38.0" layoutY="-4.0" prefHeight="416.0" prefWidth="202.0" style="-fx-background-color: #1E3A66;">
+            <children>
+                <HBox alignment="CENTER" prefHeight="93.0" prefWidth="94.0" translateX="35.0" translateY="10.0">
+                    <children>
+                        <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" translateX="-25.0" translateY="-15.0">
+                            <image>
+                                <Image url="@image/logo-javafx.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <Button id="listcategorie" fx:id="listcategorie" maxWidth="148.0" mnemonicParsing="false" onAction="#listCategorie" prefHeight="42.0" prefWidth="127.0" styleClass="action-button" stylesheets="@style.css" text="Liste Categorie" translateX="45.0" />
+            </children>
+        </VBox>
+        <Label contentDisplay="CENTER" layoutX="31.0" layoutY="34.0" prefHeight="65.0" prefWidth="483.0" stylesheets="@style.css" text="Nouvelle Categorie " textAlignment="CENTER" translateX="80.0" translateY="-30.0">
+            <styleClass>
+                <String fx:value="text" />
+                <String fx:value="title" />
+            </styleClass>
+        </Label>
+    </children>
+</AnchorPane>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="455.0" style="-fx-background-color: #0A192F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateCategorie">
+
+    <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="186.0" layoutY="90.0" prefHeight="309.0" prefWidth="507.0" style="-fx-background-color: #1E3A66;" translateX="30.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="73.0" AnchorPane.topAnchor="76.0">
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+        <children>
+            <Group layoutX="195.0" layoutY="-50.0" translateY="30.0">
+                <children>
+                    <TextField id="codef" fx:id="codef" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="170.0" promptText="Code de la Catégorie" styleClass="text-field" stylesheets="@style.css" translateX="-160.0" translateY="50.0">
+                        <font>
+                            <Font name="Bell MT" size="12.0" />
+                        </font>
+                    </TextField>
+                    <TextField id="nomf" fx:id="nomf" alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom de la Catégorie" stylesheets="@style.css" translateX="20.0" translateY="40.0">
+                        <font>
+                            <Font name="Bell MT" size="12.0" />
+                        </font>
+                    </TextField>
+                </children>
+            </Group>
+
+            <Group layoutX="195.0" layoutY="-50.0" translateY="45.0">
+                <children>
+                    <TextArea id="descriptionf" fx:id="descriptionf" prefColumnCount="0" prefHeight="110.0" prefWidth="239.0" promptText="Description de la Catégorie" stylesheets="@style.css" translateY="40.0" />
+                </children>
+            </Group>
+         <DatePicker id="dateuc" fx:id="dateuc" stylesheets="@style.css" translateY="60.0" />
+
+            <Button id="updateCategorie" fx:id="updateCategorie" mnemonicParsing="false" onAction="#updateCategorie" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Mettre à jour Catégorie" translateX="-100.0" translateY="88.0" />
+            <Button id="AnnulerUpdate" fx:id="AnnulerUpdate" mnemonicParsing="false" onAction="#AnnulerUpdate" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Annuler" translateX="90.0" translateY="50.0" />
+        </children>
+    </VBox>
+
+    <Label contentDisplay="CENTER" layoutX="31.0" layoutY="34.0" prefHeight="65.0" prefWidth="483.0" stylesheets="@style.css" text="Modifier Catégorie" textAlignment="CENTER" translateX="-10.0" translateY="-30.0">
+        <styleClass>
+            <String fx:value="text" />
+            <String fx:value="title" />
+        </styleClass>
+    </Label>
+
+</AnchorPane>

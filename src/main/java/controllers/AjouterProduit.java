@@ -102,6 +102,32 @@ private IService ps = new ProduitService();
                 alert.showAndWait();
             }
         }
+        @FXML
+        void ListCagProd(ActionEvent event) {
+            try {
+                // Charger le fichier FXML pour l'interface AjouterCategorie
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterCategorie.fxml"));
+                Parent root = loader.load();
+
+                // Créer une nouvelle scène avec l'interface AjouterCategorie
+                Scene scene = new Scene(root);
+
+                // Récupérer la fenêtre actuelle (Stage) et changer la scène
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+
+                // Optionnel : vous pouvez récupérer le contrôleur de l'interface AjouterCategorie si vous avez besoin de faire des interactions
+                AjouterCategorie ajouterCategorieController = loader.getController();
+                // Vous pouvez maintenant appeler des méthodes du contrôleur de AjouterCategorie si nécessaire
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de Chargement");
+                alert.setContentText("Il y a eu une erreur lors du chargement de l'interface AjouterCategorie.");
+                alert.showAndWait();
+            }
+        }
 
 
     }
