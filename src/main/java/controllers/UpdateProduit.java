@@ -71,38 +71,51 @@ public class UpdateProduit {
     }
     @FXML
     void updateProduit(ActionEvent event) {
-        // Mettre à jour le produit avec les nouvelles valeurs
-        currentProduct.setNom(nomf.getText());
-        currentProduct.setPrix(Double.parseDouble(prixf.getText()));
-        currentProduct.setIdCategorie(Integer.parseInt(categorief.getText()));
-        currentProduct.setDescription(descriptionf.getText());
-        currentProduct.setImagepath(imagepathf.getText());
-        currentProduct.setMarque(marquef.getText());
-        currentProduct.setReference(referencef.getText());
-        currentProduct.setStatus(statusf.getText());
-        currentProduct.setStock(Integer.parseInt(stockf.getText()));
-        currentProduct.setCouleurs(couleursf.getText());
+        try {
+            // Mettre à jour le produit avec les nouvelles valeurs
+            currentProduct.setNom(nomf.getText());
+            currentProduct.setPrix(Double.parseDouble(prixf.getText()));
+            currentProduct.setIdCategorie(Integer.parseInt(categorief.getText()));
+            currentProduct.setDescription(descriptionf.getText());
+            currentProduct.setImagepath(imagepathf.getText());
+            currentProduct.setMarque(marquef.getText());
+            currentProduct.setReference(referencef.getText());
+            currentProduct.setStatus(statusf.getText());
+            currentProduct.setStock(Integer.parseInt(stockf.getText()));
+            currentProduct.setCouleurs(couleursf.getText());
 
-        // Appel au service pour mettre à jour le produit dans la base de données
-        ProduitService produitService = new ProduitService();
-        produitService.update(currentProduct);
+            // Appel au service pour mettre à jour le produit dans la base de données
+            ProduitService produitService = new ProduitService();
+            produitService.update(currentProduct);
 
-        // Afficher un message de confirmation
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Mise à jour réussie");
-        alert.setHeaderText("Produit mis à jour avec succès");
-        alert.setContentText("Les informations du produit ont été mises à jour.");
-        alert.showAndWait();
+            // Afficher un message de confirmation
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mise à jour réussie");
+            alert.setHeaderText("Produit mis à jour avec succès");
+            alert.setContentText("Les informations du produit ont été mises à jour.");
+            alert.showAndWait();
 
-        // Rafraîchir la liste dans TousLesProduits
-        Stage stage = null;
-        TousLesProduits mainController = (TousLesProduits) stage.getOwner().getUserData();
-        Platform.runLater(() -> mainController.refreshList());
+            // Récupérer le Stage actuel
+            Stage stage = (Stage) updateProduit.getScene().getWindow();
+            if (stage != null && stage.getOwner() != null) {
+                TousLesProduits mainController = (TousLesProduits) stage.getOwner().getUserData();
+                if (mainController != null) {
+                    Platform.runLater(mainController::refreshList);
+                }
+            }
 
-        // Fermer la fenêtre actuelle après mise à jour
-        stage = (Stage) updateProduit.getScene().getWindow();
-        stage.close();
+            // Fermer la fenêtre actuelle après mise à jour
+            stage.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Échec de la mise à jour");
+            alert.setContentText("Vérifiez les données saisies.");
+            alert.showAndWait();
+        }
     }
+
     @FXML
     void AnnulerUpdate(ActionEvent event) {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
