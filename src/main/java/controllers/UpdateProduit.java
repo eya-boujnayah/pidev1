@@ -14,11 +14,9 @@ import service.ProduitService;
 import model.produit;
 
 public class UpdateProduit {
-    private ObservableList<produit> produits;
+    private ObservableList<produit> produits = FXCollections.observableArrayList();
 
-    public void setProduitList(ObservableList<produit> produits) {
-        this.produits = produits;
-    }
+
 
     @FXML
     private TextField categorief;
@@ -96,16 +94,18 @@ public class UpdateProduit {
         alert.setContentText("Les informations du produit ont été mises à jour.");
         alert.showAndWait();
 
-        // Rafraîchir la liste observable dans la vue principale
-        Platform.runLater(() -> {
-            int index = produits.indexOf(currentProduct);
-            if (index != -1) {
-                produits.set(index, currentProduct); // Mettre à jour le produit dans la liste observable
-            }
-        });
+        // Rafraîchir la liste dans TousLesProduits
+        Stage stage = null;
+        TousLesProduits mainController = (TousLesProduits) stage.getOwner().getUserData();
+        Platform.runLater(() -> mainController.refreshList());
 
         // Fermer la fenêtre actuelle après mise à jour
-        Stage stage = (Stage) updateProduit.getScene().getWindow();
+        stage = (Stage) updateProduit.getScene().getWindow();
+        stage.close();
+    }
+    @FXML
+    void AnnulerUpdate(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
     }
 

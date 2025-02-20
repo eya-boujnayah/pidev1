@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +15,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import model.produit;
 import service.ProduitService;
 import javafx.stage.Stage;
@@ -68,6 +71,10 @@ public class TousLesProduits {
                 }
             }
         });
+        // Rafraîchir la liste toutes les 10 secondes
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> refreshList()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     private void afficherDetails(produit produit) {
@@ -122,6 +129,9 @@ public class TousLesProduits {
         }
     }
 
+    public void refreshList() {
+        produits.setAll(produitService.display()); // Recharge les produits
+    }
 
 
 

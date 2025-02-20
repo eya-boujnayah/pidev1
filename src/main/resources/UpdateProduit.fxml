@@ -85,6 +85,7 @@
                     </font>
                 </TextField>
                 <Button id="updateProduit" fx:id="updateProduit" mnemonicParsing="false" onAction="#updateProduit" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Mettre à jour Produit" translateX="-100.0" translateY="30.0" />
+         <Button id="AnnulerUpdate" fx:id="AnnulerUpdate" mnemonicParsing="false" onAction="#AnnulerUpdate" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Annuler" translateX="90.0" translateY="-9.0" />
             </children>
         </VBox>
         <Label contentDisplay="CENTER" layoutX="31.0" layoutY="34.0" prefHeight="65.0" prefWidth="483.0" stylesheets="@style.css" text="Modifier Produit" textAlignment="CENTER" translateX="-10.0" translateY="-30.0">
