@@ -77,20 +77,20 @@
                   </TextField>
                </children>
             </Group>
-            <Group layoutX="195.0" layoutY="41.0" translateX="-60.0" translateY="75.0">
+            <Group layoutX="195.0" layoutY="41.0" translateX="-90.0" translateY="70.0">
                <children>
-                  <TextArea id="description" fx:id="description" prefColumnCount="0" prefHeight="55.0" prefWidth="239.0" promptText="Description du Produit" scrollLeft="20.0" scrollTop="20.0" styleClass="textarea-field" stylesheets="@style.css" />
+                  <TextArea id="description" fx:id="description" prefColumnCount="0" prefHeight="58.0" prefWidth="171.0" promptText="Description du Produit" scrollLeft="20.0" scrollTop="20.0" styleClass="textarea-field" stylesheets="@style.css" translateY="10.0" />
                </children>
             </Group>
-            <TextField id="imagepath" fx:id="imagepath" alignment="TOP_RIGHT" cacheShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="54.0" prefWidth="100.0" promptText="Image" stylesheets="@style.css" translateX="125.0" translateY="19.0">
-               <font>
-                  <Font name="Bell MT" size="12.0" />
-               </font>
-            </TextField>
-            <Button mnemonicParsing="false" onAction="#addProduit" prefHeight="38.0" prefWidth="156.0" stylesheets="@style.css" text="Ajouter Produit " translateY="30.0" />
+            <HBox spacing="10" translateX="45.0" translateY="30.0">
+               <TextField fx:id="imagepath" editable="false" prefHeight="31.0" prefWidth="92.0" promptText="Image Path" stylesheets="@style.css" translateX="50.0" translateY="-10.0" />
+               <Button maxHeight="20.0" maxWidth="20.0" minHeight="30.0" minWidth="30.0" onAction="#chooseImage" prefHeight="27.0" prefWidth="28.0" stylesheets="@style.css" text="Choisir Image" translateX="50.0" translateY="-12.0" />
+            </HBox>
+            <ImageView fx:id="imageView" fitHeight="90.0" fitWidth="101.0" preserveRatio="true" translateX="100.0" translateY="30.0" />
+            <Button mnemonicParsing="false" onAction="#addProduit" prefHeight="38.0" prefWidth="156.0" stylesheets="@style.css" text="Ajouter Produit " translateX="-60.0" translateY="-20.0" />
          </children>
       </VBox>
-      <VBox layoutX="-38.0" layoutY="-4.0" prefHeight="416.0" prefWidth="202.0" style="-fx-background-color: #1E3A66;">
+      <VBox layoutX="-38.0" layoutY="-4.0" prefHeight="455.0" prefWidth="202.0" style="-fx-background-color: #1E3A66;">
          <children>
             <HBox alignment="CENTER" prefHeight="93.0" prefWidth="94.0" translateX="35.0" translateY="10.0">
                <children>

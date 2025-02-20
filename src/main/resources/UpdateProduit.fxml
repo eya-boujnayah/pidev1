@@ -7,11 +7,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="455.0" style="-fx-background-color: #0A192F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateProduit">
+<AnchorPane prefHeight="466.0" prefWidth="514.0" style="-fx-background-color: #0A192F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateProduit">
 
         <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="186.0" layoutY="90.0" prefHeight="309.0" prefWidth="507.0" style="-fx-background-color: #1E3A66;" translateX="30.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="73.0" AnchorPane.topAnchor="76.0">
             <opaqueInsets>
@@ -74,18 +76,20 @@
                         </TextField>
                     </children>
                 </Group>
-                <Group layoutX="195.0" layoutY="41.0" translateX="-60.0" translateY="75.0">
+                <Group layoutX="195.0" layoutY="41.0" translateX="-60.0" translateY="85.0">
                     <children>
-                        <TextArea id="descriptionf" fx:id="descriptionf" prefColumnCount="0" prefHeight="55.0" prefWidth="239.0" promptText="Description du Produit" scrollLeft="20.0" scrollTop="20.0" styleClass="textarea-field" stylesheets="@style.css" />
+                        <TextArea id="descriptionf" fx:id="descriptionf" prefColumnCount="0" prefHeight="95.0" prefWidth="239.0" promptText="Description du Produit" scrollLeft="20.0" scrollTop="20.0" styleClass="textarea-field" stylesheets="@style.css" />
                     </children>
                 </Group>
-                <TextField id="imagepathf" fx:id="imagepathf" alignment="TOP_RIGHT" cacheShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="54.0" prefWidth="100.0" promptText="Image" stylesheets="@style.css" translateX="125.0" translateY="19.0">
-                    <font>
-                        <Font name="Bell MT" size="12.0" />
-                    </font>
-                </TextField>
-                <Button id="updateProduit" fx:id="updateProduit" mnemonicParsing="false" onAction="#updateProduit" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Mettre à jour Produit" translateX="-100.0" translateY="30.0" />
-         <Button id="AnnulerUpdate" fx:id="AnnulerUpdate" mnemonicParsing="false" onAction="#AnnulerUpdate" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Annuler" translateX="90.0" translateY="-9.0" />
+                <HBox spacing="10" translateX="80.0" translateY="-10.0">
+                    <TextField fx:id="imagepathf" editable="false" prefHeight="31.0" prefWidth="92.0" promptText="Image Path" stylesheets="@style.css" translateX="50.0" translateY="-10.0" />
+                    <Button maxHeight="20.0" maxWidth="20.0" minHeight="30.0" minWidth="30.0" onAction="#chooseImage" prefHeight="27.0" prefWidth="28.0" stylesheets="@style.css" text="Choisir Image" translateX="50.0" translateY="-12.0" />
+                </HBox>
+         <ImageView id="imgviewupdtProd" fx:id="imgviewupdtProd" fitHeight="90.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" translateX="130.0" translateY="-10.0" />
+
+
+                <Button id="updateProduit" fx:id="updateProduit" mnemonicParsing="false" onAction="#updateProduit" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Mettre à jour Produit" translateX="-100.0" />
+         <Button id="AnnulerUpdate" fx:id="AnnulerUpdate" mnemonicParsing="false" onAction="#AnnulerUpdate" prefHeight="38.0" prefWidth="177.0" stylesheets="@style.css" text="Annuler" translateX="90.0" translateY="-39.0" />
             </children>
         </VBox>
         <Label contentDisplay="CENTER" layoutX="31.0" layoutY="34.0" prefHeight="65.0" prefWidth="483.0" stylesheets="@style.css" text="Modifier Produit" textAlignment="CENTER" translateX="-10.0" translateY="-30.0">

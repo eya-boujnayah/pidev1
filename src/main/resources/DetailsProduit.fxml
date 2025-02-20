@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -9,14 +10,15 @@
 
     <Label styleClass="title2" text="Détails du Produit" translateY="-5.0" />
 
-    <Label fx:id="labelReference" contentDisplay="RIGHT" maxHeight="22.0" maxWidth="250.0" prefHeight="22.0" prefWidth="110.0" styleClass="case" stylesheets="@style.css" text="Référence : -" translateY="-25.0">
+    <Label fx:id="labelReference" contentDisplay="RIGHT" maxHeight="22.0" maxWidth="250.0" prefHeight="22.0" prefWidth="110.0" styleClass="case" stylesheets="@style.css" text="Référence : -" translateY="150.0">
       <font>
          <Font size="14.0" />
       </font></Label>
-    <Label fx:id="labelNomProduit" contentDisplay="RIGHT" maxHeight="22.0" maxWidth="250.0" prefHeight="22.0" prefWidth="109.0" styleClass="case" text="Nom : -" translateY="-25.0">
+    <Label fx:id="labelNomProduit" contentDisplay="RIGHT" maxHeight="22.0" maxWidth="250.0" prefHeight="22.0" prefWidth="109.0" styleClass="case" text="Nom : -" translateY="150.0">
       <font>
          <Font size="14.0" />
       </font></Label>
+   <ImageView id="imageView" fx:id="imageView" fitHeight="163.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateY="-80.0" />
     <Label fx:id="labelDescriptionProduit" contentDisplay="RIGHT" maxHeight="22.0" maxWidth="250.0" prefHeight="22.0" prefWidth="112.0" styleClass="case" text="Description : -" translateY="-25.0" wrapText="true">
       <font>
          <Font size="14.0" />
@@ -47,6 +49,6 @@
       </font></Label>
 
     <Button maxHeight="52.0" maxWidth="100.0" onAction="#fermerFenetre" prefHeight="52.0" prefWidth="79.0" stylesheets="@style.css" text="Fermer" translateX="-50.0" />
-    <Button id="updtprd" fx:id="updtprd" maxHeight="52.0" maxWidth="100.0" onAction="#updtprd" prefHeight="52.0" prefWidth="100.0" stylesheets="@style.css" text="Mise à jour" translateX="70.0" translateY="-59.0" />
+    <Button id="updtprd" fx:id="updtprd" maxHeight="52.0" maxWidth="100.0" onAction="#updtprd" prefHeight="52.0" prefWidth="100.0" stylesheets="@style.css" text="Mise à jour" translateX="70.0" translateY="-48.0" />
 
 </VBox>

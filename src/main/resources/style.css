@@ -161,7 +161,7 @@
     -fx-border-width: 3px;
     -fx-border-radius: 15px; /* Bordure plus arrondie */
     -fx-background-radius: 15px; /* Arrondi pour le fond */
-    -fx-font-size: 16px; /* Taille du texte */
+    -fx-font-size: 12px; /* Taille du texte */
     -fx-text-fill: #FFFFFF; /* Texte blanc */
     -fx-font-family: "Bell MT";
     -fx-cursor: hand;

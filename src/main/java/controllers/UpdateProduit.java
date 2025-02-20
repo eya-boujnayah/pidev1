@@ -9,13 +9,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import service.ProduitService;
 import model.produit;
 
+import java.io.File;
+import javax.swing.*;
+
+
 public class UpdateProduit {
     private ObservableList<produit> produits = FXCollections.observableArrayList();
 
+    @FXML
+    private ImageView imgviewupdtProd;
 
 
     @FXML
@@ -60,7 +69,7 @@ public class UpdateProduit {
         // Remplir les champs avec les données du produit actuel
         nomf.setText(product.getNom());
         prixf.setText(String.valueOf(product.getPrix()));
-      categorief.setText(String.valueOf(product.getIdCategorie()));  // Si 'getNom' existe dans la classe 'Categorie'
+        categorief.setText(String.valueOf(product.getIdCategorie()));  // Si 'getNom' existe dans la classe 'Categorie'
         descriptionf.setText(product.getDescription());
         imagepathf.setText(product.getImagepath());
         marquef.setText(product.getMarque());
@@ -68,6 +77,16 @@ public class UpdateProduit {
         statusf.setText(product.getStatus());
         stockf.setText(String.valueOf(product.getStock()));
         couleursf.setText(product.getCouleurs());
+
+        // Charger l'image de l'ancienne image dans l'ImageView
+        String imagePath = product.getImagepath();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            File imageFile = new File(imagePath);
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                imgviewupdtProd.setImage(image);  // Afficher l'image dans l'ImageView
+            }
+        }
     }
     @FXML
     void updateProduit(ActionEvent event) {
@@ -83,6 +102,7 @@ public class UpdateProduit {
             currentProduct.setStatus(statusf.getText());
             currentProduct.setStock(Integer.parseInt(stockf.getText()));
             currentProduct.setCouleurs(couleursf.getText());
+
 
             // Appel au service pour mettre à jour le produit dans la base de données
             ProduitService produitService = new ProduitService();
@@ -123,7 +143,22 @@ public class UpdateProduit {
     }
 
 
+    @FXML
+    private void chooseImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        File selectedFile = fileChooser.showOpenDialog(null);  // Ouvre la boîte de dialogue pour choisir un fichier
 
+        if (selectedFile != null) {
+            // Si un fichier est sélectionné, met à jour le chemin dans le TextField
+            imagepathf.setText(selectedFile.getAbsolutePath());
 
+            // Mettre à jour l'image dans l'ImageView
+            String imagePath = selectedFile.getAbsolutePath();
+            Image image = new Image(imagePath);  // Charger l'image
+            imgviewupdtProd.setImage(image);  // Afficher l'image dans l'ImageView
+        }
     }
+
+}
 

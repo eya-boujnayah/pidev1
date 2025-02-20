@@ -3,15 +3,20 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.produit;
 import service.ProduitService;
- import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.Parent;
 import javafx.scene.Node;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+
 public class DetailsProduit {
 
     @FXML private Label labelReference;
@@ -23,9 +28,9 @@ public class DetailsProduit {
     @FXML private Label labelCouleurs;
     @FXML private Label labelStatus;
     @FXML private Label labelIdCategorie;
+    @FXML private ImageView imageView; // ImageView pour afficher l'image du produit
 
     private static produit produitActuel;  // Attribut privé
-
 
     private ProduitService produitService = new ProduitService(); // Création d'une instance de ProduitService
 
@@ -40,7 +45,31 @@ public class DetailsProduit {
         labelStock.setText("Stock : " + produit.getStock());
         labelCouleurs.setText("Couleurs : " + produit.getCouleurs());
         labelStatus.setText("Statut : " + produit.getStatus());
-        labelIdCategorie.setText(" Catégorie : " + produit.getIdCategorie());
+        labelIdCategorie.setText("Catégorie : " + produit.getIdCategorie());
+
+        // Ajouter l'affichage de l'image si le path est valide
+        afficherImage(produit.getImagepath());
+    }
+
+    // Méthode pour afficher l'image du produit
+    private void afficherImage(String imagePath) {
+        try {
+            File file = new File(imagePath);
+            if (file.exists()) {
+                // Charger l'image depuis le chemin du fichier
+                Image image = new Image(new FileInputStream(file));
+                imageView.setImage(image);
+            } else {
+                // Afficher une image par défaut si le fichier n'est pas trouvé
+                Image defaultImage = new Image("default-image-path.png"); // Remplacer par le chemin de votre image par défaut
+                imageView.setImage(defaultImage);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            // Afficher une image par défaut si une exception est lancée
+            Image defaultImage = new Image("default-image-path.png"); // Remplacer par le chemin de votre image par défaut
+            imageView.setImage(defaultImage);
+        }
     }
 
     // Fermer la fenêtre actuelle
@@ -53,13 +82,13 @@ public class DetailsProduit {
     @FXML
     void updtprd(ActionEvent event) {
         try {
-            // Load the FXML file
+            // Charger le fichier FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateProduit.fxml"));
             Scene detailsScene = new Scene(loader.load());
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(detailsScene);
             currentStage.show();
-            //recuperation de
+            // Récupérer le contrôleur
             UpdateProduit controller = loader.getController();
 
             controller.setUpdateProduit(produitActuel);
@@ -68,12 +97,4 @@ public class DetailsProduit {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
 }
-
-
