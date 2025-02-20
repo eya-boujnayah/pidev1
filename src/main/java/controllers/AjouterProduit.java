@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -28,8 +29,9 @@ public class AjouterProduit {
     private TextField categorie;
 
     @FXML
-    private TextField couleurs;
-
+    private ComboBox<String> couleurs;
+    @FXML
+    private ComboBox<String> status;
     @FXML
     private TextArea description;
 
@@ -51,8 +53,6 @@ public class AjouterProduit {
     @FXML
     private TextField reference;
 
-    @FXML
-    private TextField status;
 
     @FXML
     private TextField stock;
@@ -71,8 +71,8 @@ public class AjouterProduit {
                 prixValue,
                 marque.getText(),
                 stockValue,
-                couleurs.getText(),
-                status.getText(),
+                couleurs.getSelectionModel().getSelectedItem(), // Changement ici
+                status.getSelectionModel().getSelectedItem(),
                 imagepath.getText(),  // Chemin de l'image
                 idCategorie));
 
@@ -88,8 +88,8 @@ public class AjouterProduit {
         prix.clear();
         marque.clear();
         stock.clear();
-        couleurs.clear();
-        status.clear();
+        couleurs.getSelectionModel().clearSelection();
+        status.getSelectionModel().clearSelection();
         imagepath.clear();
         imageView.setImage(null);  // Réinitialiser l'image affichée
     }

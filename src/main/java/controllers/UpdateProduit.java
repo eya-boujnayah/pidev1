@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -30,11 +27,12 @@ public class UpdateProduit {
     @FXML
     private TextField categorief;
 
-    @FXML
-    private TextField couleursf;
+
 
     @FXML
     private TextArea descriptionf;
+    @FXML
+    private ComboBox<String> couleursf;
 
     @FXML
     private TextField imagepathf;
@@ -50,9 +48,8 @@ public class UpdateProduit {
 
     @FXML
     private TextField referencef;
-
     @FXML
-    private TextField statusf;
+    private ComboBox<String> statusf;
 
     @FXML
     private TextField stockf;
@@ -74,9 +71,9 @@ public class UpdateProduit {
         imagepathf.setText(product.getImagepath());
         marquef.setText(product.getMarque());
         referencef.setText(product.getReference());
-        statusf.setText(product.getStatus());
+        statusf.setValue(product.getStatus());
         stockf.setText(String.valueOf(product.getStock()));
-        couleursf.setText(product.getCouleurs());
+        couleursf.setValue(product.getCouleurs());
 
         // Charger l'image de l'ancienne image dans l'ImageView
         String imagePath = product.getImagepath();
@@ -99,9 +96,9 @@ public class UpdateProduit {
             currentProduct.setImagepath(imagepathf.getText());
             currentProduct.setMarque(marquef.getText());
             currentProduct.setReference(referencef.getText());
-            currentProduct.setStatus(statusf.getText());
+            currentProduct.setStatus(statusf.getSelectionModel().getSelectedItem().toString());
             currentProduct.setStock(Integer.parseInt(stockf.getText()));
-            currentProduct.setCouleurs(couleursf.getText());
+            currentProduct.setCouleurs(couleursf.getSelectionModel().getSelectedItem().toString());
 
 
             // Appel au service pour mettre à jour le produit dans la base de données

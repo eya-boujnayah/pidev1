@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -55,30 +57,42 @@
                                 <Font name="Bell MT" size="12.0" />
                             </font>
                         </TextField>
-                        <TextField id="couleursf" fx:id="couleursf" alignment="TOP_RIGHT" cacheShape="false" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="170.0" promptText="Couleurs disponible" stylesheets="@style.css" translateX="20.0" translateY="40.0">
-                            <font>
-                                <Font name="Bell MT" size="12.0" />
-                            </font>
-                        </TextField>
+                        <ComboBox fx:id="couleursf" layoutX="20.0" layoutY="20.0" minHeight="30.0" prefHeight="20.0" prefWidth="170.0" promptText="Couleurs disponibles" styleClass="text-field" stylesheets="@style.css" translateX="20.0" translateY="40.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Rouge" />
+                                    <String fx:value="Bleu" />
+                                    <String fx:value="Vert" />
+                                    <String fx:value="Jaune" />
+                                    <String fx:value="Noir" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+
                     </children>
                 </Group>
                 <Group layoutX="195.0" layoutY="11.0" translateY="60.0">
                     <children>
-                        <TextField id="statusf" fx:id="statusf" alignment="TOP_LEFT" cacheShape="false" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="170.0" promptText="Status du Produit" stylesheets="@style.css" translateX="-160.0" translateY="50.0">
-                            <font>
-                                <Font name="Bell MT" size="12.0" />
-                            </font>
-                        </TextField>
-                        <TextField id="categorief" fx:id="categorief" alignment="TOP_RIGHT" cacheShape="false" layoutX="10.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="170.0" promptText="Categorie du Produit" stylesheets="@style.css" translateX="20.0" translateY="40.0">
+                        <ComboBox id="statusf" fx:id="statusf" layoutX="10.0" layoutY="18.0" minHeight="20.0" prefHeight="30.0" prefWidth="170.0" promptText="Status du Produit" styleClass="text-field" stylesheets="@style.css" translateX="20.0" translateY="40.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Disponible" />
+                                    <String fx:value="Indisponible" />
+                                    <String fx:value="En rupture de stock" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+
+                        <TextField id="categorief" fx:id="categorief" alignment="TOP_RIGHT" cacheShape="false" layoutX="10.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="170.0" promptText="Categorie du Produit" stylesheets="@style.css" translateX="215.0" translateY="40.0">
                             <font>
                                 <Font name="Bell MT" size="12.0" />
                             </font>
                         </TextField>
                     </children>
                 </Group>
-                <Group layoutX="195.0" layoutY="41.0" translateX="-60.0" translateY="85.0">
+                <Group layoutX="195.0" layoutY="41.0" translateX="-80.0" translateY="85.0">
                     <children>
-                        <TextArea id="descriptionf" fx:id="descriptionf" prefColumnCount="0" prefHeight="95.0" prefWidth="239.0" promptText="Description du Produit" scrollLeft="20.0" scrollTop="20.0" styleClass="textarea-field" stylesheets="@style.css" />
+                        <TextArea id="descriptionf" fx:id="descriptionf" prefColumnCount="0" prefHeight="95.0" prefWidth="218.0" promptText="Description du Produit" scrollLeft="20.0" scrollTop="20.0" styleClass="textarea-field" stylesheets="@style.css" translateX="-20.0" />
                     </children>
                 </Group>
                 <HBox spacing="10" translateX="80.0" translateY="-10.0">
