@@ -6,7 +6,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.produit;
 import service.ProduitService;
+ import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.scene.Node;
 
+import java.io.IOException;
 public class DetailsProduit {
 
     @FXML private Label labelReference;
@@ -19,7 +24,9 @@ public class DetailsProduit {
     @FXML private Label labelStatus;
     @FXML private Label labelIdCategorie;
 
-    private produit produitActuel;
+    private static produit produitActuel;  // Attribut privé
+
+
     private ProduitService produitService = new ProduitService(); // Création d'une instance de ProduitService
 
     // Méthode pour définir les détails du produit
@@ -43,4 +50,30 @@ public class DetailsProduit {
         stage.close();
     }
 
+    @FXML
+    void updtprd(ActionEvent event) {
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateProduit.fxml"));
+            Scene detailsScene = new Scene(loader.load());
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(detailsScene);
+            currentStage.show();
+            //recuperation de
+            UpdateProduit controller = loader.getController();
+
+            controller.setUpdateProduit(produitActuel);
+        } catch (Exception e) {
+            System.out.println("Erreur inattendue : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
 }
+
+

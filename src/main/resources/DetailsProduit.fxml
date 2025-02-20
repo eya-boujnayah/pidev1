@@ -47,4 +47,6 @@
       </font></Label>
 
     <Button maxHeight="52.0" maxWidth="100.0" onAction="#fermerFenetre" prefHeight="52.0" prefWidth="79.0" stylesheets="@style.css" text="Fermer" translateX="-50.0" />
- </VBox>
+    <Button id="updtprd" fx:id="updtprd" maxHeight="52.0" maxWidth="100.0" onAction="#updtprd" prefHeight="52.0" prefWidth="100.0" stylesheets="@style.css" text="Mise à jour" translateX="70.0" translateY="-59.0" />
+
+</VBox>

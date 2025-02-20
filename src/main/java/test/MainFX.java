@@ -20,10 +20,6 @@ public class MainFX extends Application {
             primaryStage.setTitle("Ajouter Produit");
             primaryStage.show();
 
-            // Exemple de logique pour changer la scène après un événement (ici un clic de bouton)
-            // Tu peux ajouter un événement pour changer la scène, par exemple :
-            // Button button = (Button) root.lookup("#changeSceneButton");
-            // button.setOnAction(event -> changeScene(primaryStage));
 
         } catch (IOException e) {
             System.out.println(e.getMessage());

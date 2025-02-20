@@ -9,8 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.Node;
+ import javafx.scene.Node;
 
 import model.produit;
 import service.IService;
