@@ -1,60 +1,57 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Facture {
-    private int idFacture,idCommande;
-    private int idUtilisateur;
+    private int idFacture;
+    private Commande commande;  // Clé étrangère remplacée par l'objet Commande
+    private utilisateur utilisateur; // Clé étrangère remplacée par l'objet Utilisateur
     private float prixTotal;
-    private String TypePaiement;
-    private String AdresseLivraison;
+    private String typePaiement, adresseLivraison, statutFacture;
     private Date dateFacture;
-    private String statutFacture;
-    public Facture() {}
 
-    public Facture(int idFacture, int idCommande, int idUtilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
+    public Facture(int idFacture, Commande commande, utilisateur utilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
         this.idFacture = idFacture;
-        this.idCommande = idCommande;
-        this.idUtilisateur = idUtilisateur;
+        this.commande = commande;
+        this.utilisateur = utilisateur;
         this.prixTotal = prixTotal;
-        TypePaiement = typePaiement;
-        AdresseLivraison = adresseLivraison;
+        this.typePaiement = typePaiement;
+        this.adresseLivraison = adresseLivraison;
         this.dateFacture = dateFacture;
         this.statutFacture = statutFacture;
     }
 
-    public Facture(int idCommande, int idUtilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
-        this.idCommande = idCommande;
-        this.idUtilisateur = idUtilisateur;
+    public Facture(Commande commande, utilisateur utilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
+        this.commande = commande;
+        this.utilisateur = utilisateur;
         this.prixTotal = prixTotal;
-        TypePaiement = typePaiement;
-        AdresseLivraison = adresseLivraison;
+        this.typePaiement = typePaiement;
+        this.adresseLivraison = adresseLivraison;
         this.dateFacture = dateFacture;
         this.statutFacture = statutFacture;
     }
 
-    public int getIdFacture() {
-        return idFacture;
+    public Facture() {
     }
 
-    public void setIdFacture(int idFacture) {
-        this.idFacture = idFacture;
+    public Facture(int commandeId, int utilisateurId, float prix, String paiement, String adresse, String statut, String string) {
     }
 
-    public int getIdCommande() {
-        return idCommande;
+    public Commande getCommande() {
+        return commande;
     }
 
-    public void setIdCommande(int idCommande) {
-        this.idCommande = idCommande;
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 
-    public int getIdUtilisateur() {
-        return idUtilisateur;
+    public utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setIdUtilisateur(int idUtilisateur) {
-        this.idUtilisateur = idUtilisateur;
+    public void setUtilisateur(utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
     public float getPrixTotal() {
@@ -66,19 +63,19 @@ public class Facture {
     }
 
     public String getTypePaiement() {
-        return TypePaiement;
+        return typePaiement;
     }
 
     public void setTypePaiement(String typePaiement) {
-        TypePaiement = typePaiement;
+        this.typePaiement = typePaiement;
     }
 
     public String getAdresseLivraison() {
-        return AdresseLivraison;
+        return adresseLivraison;
     }
 
     public void setAdresseLivraison(String adresseLivraison) {
-        AdresseLivraison = adresseLivraison;
+        this.adresseLivraison = adresseLivraison;
     }
 
     public Date getDateFacture() {
@@ -97,17 +94,15 @@ public class Facture {
         this.statutFacture = statutFacture;
     }
 
-    @Override
-    public String toString() {
-        return "Facture{" +
-                "idFacture=" + idFacture +
-                ", idCommande=" + idCommande +
-                ", idUtilisateur=" + idUtilisateur +
-                ", prixTotal=" + prixTotal +
-                ", TypePaiement='" + TypePaiement + '\'' +
-                ", AdresseLivraison='" + AdresseLivraison + '\'' +
-                ", dateFacture=" + dateFacture +
-                ", statutFacture='" + statutFacture + '\'' +
-                '}';
+    public int getIdFacture() {
+        return idFacture;
+    }
+
+    public void setIdFacture(int idFacture) {
+        this.idFacture = idFacture;
+    }
+
+    public void setDateFacture(LocalDate localDate) {
+
     }
 }

@@ -3,15 +3,17 @@ package model;
 import java.util.Date;
 
 public class Commande {
-private int idCommande,idUtilisateur;
-private float prixCommande;
-private String statutCommande;
-private Date dateCommande;
+    private int idCommande;
+    private utilisateur idUtilisateur;
+    private float prixCommande;
+    private String statutCommande;
+    private Date dateCommande;
 
+    // Constructeur sans arguments
     public Commande() {
     }
 
-    public Commande(int idCommande, int idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
+    public Commande(int idCommande, utilisateur idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
         this.idCommande = idCommande;
         this.idUtilisateur = idUtilisateur;
         this.prixCommande = prixCommande;
@@ -19,11 +21,14 @@ private Date dateCommande;
         this.dateCommande = dateCommande;
     }
 
-    public Commande(int idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
+    public Commande(utilisateur idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
         this.idUtilisateur = idUtilisateur;
         this.prixCommande = prixCommande;
         this.statutCommande = statutCommande;
         this.dateCommande = dateCommande;
+    }
+
+    public Commande(int idCommande, int i, float prixCommande, String text, java.sql.Date date) {
     }
 
     public int getIdCommande() {
@@ -34,11 +39,11 @@ private Date dateCommande;
         this.idCommande = idCommande;
     }
 
-    public int getIdUtilisateur() {
+    public utilisateur getIdUtilisateur() {
         return idUtilisateur;
     }
 
-    public void setIdUtilisateur(int idUtilisateur) {
+    public void setIdUtilisateur(utilisateur idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
     }
 
@@ -64,16 +69,5 @@ private Date dateCommande;
 
     public void setDateCommande(Date dateCommande) {
         this.dateCommande = dateCommande;
-    }
-
-    @Override
-    public String toString() {
-        return "Commande{" +
-                "idCommande=" + idCommande +
-                ", idUtilisateur=" + idUtilisateur +
-                ", prixCommande=" + prixCommande +
-                ", statutCommande='" + statutCommande + '\'' +
-                ", dateCommande=" + dateCommande +
-                '}';
     }
 }
