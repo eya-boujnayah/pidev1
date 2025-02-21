@@ -12,10 +12,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import service.ProduitService;
 import model.produit;
+import service.CategorieService;
+import model.categorie;
 
 import java.io.File;
-import javax.swing.*;
-
+import java.util.List;
 
 public class UpdateProduit {
     private ObservableList<produit> produits = FXCollections.observableArrayList();
@@ -23,14 +24,12 @@ public class UpdateProduit {
     @FXML
     private ImageView imgviewupdtProd;
 
-
     @FXML
-    private TextField categorief;
-
-
+    private ComboBox<String> categoriefComboBox;
 
     @FXML
     private TextArea descriptionf;
+
     @FXML
     private ComboBox<String> couleursf;
 
@@ -48,6 +47,7 @@ public class UpdateProduit {
 
     @FXML
     private TextField referencef;
+
     @FXML
     private ComboBox<String> statusf;
 
@@ -66,7 +66,6 @@ public class UpdateProduit {
         // Remplir les champs avec les données du produit actuel
         nomf.setText(product.getNom());
         prixf.setText(String.valueOf(product.getPrix()));
-        categorief.setText(String.valueOf(product.getIdCategorie()));  // Si 'getNom' existe dans la classe 'Categorie'
         descriptionf.setText(product.getDescription());
         imagepathf.setText(product.getImagepath());
         marquef.setText(product.getMarque());
@@ -84,22 +83,74 @@ public class UpdateProduit {
                 imgviewupdtProd.setImage(image);  // Afficher l'image dans l'ImageView
             }
         }
+
+        // Charger toutes les catégories dans le ComboBox
+        loadCategories();
+
+        // Sélectionner la catégorie actuelle du produit dans le ComboBox
+        categoriefComboBox.setValue(getCategorieNameById(product.getIdCategorie()));
     }
+
+    // Méthode pour charger toutes les catégories dans le ComboBox
+    private void loadCategories() {
+        CategorieService categorieService = new CategorieService();
+        List<categorie> categories = categorieService.display();
+
+        // Extraire le nom de chaque catégorie et les ajouter au ComboBox
+        ObservableList<String> categoryNames = FXCollections.observableArrayList();
+        for (categorie cat : categories) {
+            categoryNames.add(cat.getNom());
+        }
+
+        categoriefComboBox.setItems(categoryNames);  // Assigner les catégories au ComboBox
+    }
+
     @FXML
     void updateProduit(ActionEvent event) {
         try {
-            // Mettre à jour le produit avec les nouvelles valeurs
+            // Validation et mise à jour du produit avec les nouvelles valeurs
             currentProduct.setNom(nomf.getText());
-            currentProduct.setPrix(Double.parseDouble(prixf.getText()));
-            currentProduct.setIdCategorie(Integer.parseInt(categorief.getText()));
+
+            // Validation du prix
+            try {
+                double prix = Double.parseDouble(prixf.getText());
+                currentProduct.setPrix(prix);
+            } catch (NumberFormatException e) {
+                showError("Prix invalide", "Veuillez entrer un prix valide.");
+                return;
+            }
+
+            // Validation de l'ID de catégorie
+            try {
+                currentProduct.setIdCategorie(getCategorieIdByName(categoriefComboBox.getValue()));  // Utilisation de l'ID de la catégorie sélectionnée
+            } catch (NumberFormatException e) {
+                showError("ID de catégorie invalide", "Veuillez entrer une catégorie valide.");
+                return;
+            }
+
             currentProduct.setDescription(descriptionf.getText());
             currentProduct.setImagepath(imagepathf.getText());
             currentProduct.setMarque(marquef.getText());
             currentProduct.setReference(referencef.getText());
-            currentProduct.setStatus(statusf.getSelectionModel().getSelectedItem().toString());
-            currentProduct.setStock(Integer.parseInt(stockf.getText()));
-            currentProduct.setCouleurs(couleursf.getSelectionModel().getSelectedItem().toString());
 
+            // Validation du statut et des couleurs
+            String selectedStatus = statusf.getSelectionModel().getSelectedItem();
+            if (selectedStatus != null) {
+                currentProduct.setStatus(selectedStatus);
+            }
+
+            String selectedCouleur = couleursf.getSelectionModel().getSelectedItem();
+            if (selectedCouleur != null) {
+                currentProduct.setCouleurs(selectedCouleur);
+            }
+
+            // Validation du stock
+            try {
+                currentProduct.setStock(Integer.parseInt(stockf.getText()));
+            } catch (NumberFormatException e) {
+                showError("Stock invalide", "Veuillez entrer un nombre valide pour le stock.");
+                return;
+            }
 
             // Appel au service pour mettre à jour le produit dans la base de données
             ProduitService produitService = new ProduitService();
@@ -125,12 +176,17 @@ public class UpdateProduit {
             stage.close();
         } catch (Exception e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Échec de la mise à jour");
-            alert.setContentText("Vérifiez les données saisies.");
-            alert.showAndWait();
+            showError("Erreur de mise à jour", "Une erreur s'est produite lors de la mise à jour du produit.");
         }
+    }
+
+    // Affichage d'une fenêtre d'erreur
+    private void showError(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
@@ -138,7 +194,6 @@ public class UpdateProduit {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
     }
-
 
     @FXML
     private void chooseImage(ActionEvent event) {
@@ -157,5 +212,27 @@ public class UpdateProduit {
         }
     }
 
-}
+    // Méthode pour obtenir le nom de la catégorie par son ID
+    private String getCategorieNameById(int idCategorie) {
+        CategorieService categorieService = new CategorieService();
+        List<categorie> categories = categorieService.display();
+        for (categorie cat : categories) {
+            if (cat.getIdCategorie() == idCategorie) {
+                return cat.getNom();
+            }
+        }
+        return null;
+    }
 
+    // Méthode pour obtenir l'ID de la catégorie par son nom
+    private int getCategorieIdByName(String nomCategorie) {
+        CategorieService categorieService = new CategorieService();
+        List<categorie> categories = categorieService.display();
+        for (categorie cat : categories) {
+            if (cat.getNom().equals(nomCategorie)) {
+                return cat.getIdCategorie();
+            }
+        }
+        return -1; // Retourne -1 si la catégorie n'existe pas
+    }
+}

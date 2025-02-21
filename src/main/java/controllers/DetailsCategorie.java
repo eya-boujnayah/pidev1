@@ -24,14 +24,19 @@ public class DetailsCategorie {
 
     private CategorieService categorieService = new CategorieService(); // Création d'une instance de CategorieService
 
-    // Méthode pour définir les détails de la catégorie
-    public void setCategorie(categorie categorie) {
-        this.categorieActuelle = categorie;
-        labelReference.setText("Référence : " + categorie.getReference());
-        labelNomCategorie.setText("Nom : " + categorie.getNom());
-        labelDescriptionCategorie.setText("Description : " + categorie.getDescription());
-        labelDateCreation.setText("Date de création : " + categorie.getDateCreation().toString());
+    public void setCategorieById(int idCategorie) {
+        this.categorieActuelle = categorieService.getCategorieById(idCategorie);
+
+        if (categorieActuelle != null) {
+            labelReference.setText("Référence : " + categorieActuelle.getReference());
+            labelNomCategorie.setText("Nom : " + categorieActuelle.getNom());
+            labelDescriptionCategorie.setText("Description : " + categorieActuelle.getDescription());
+            labelDateCreation.setText("Date de création : " + categorieActuelle.getDateCreation().toString());
+        } else {
+            labelNomCategorie.setText("Catégorie introuvable");
+        }
     }
+
 
     // Fermer la fenêtre actuelle
     @FXML

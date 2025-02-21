@@ -15,18 +15,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.categorie;
 import model.produit;
+import service.CategorieService;
 import service.IService;
 import service.ProduitService;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AjouterProduit {
 
     @FXML
-    private TextField categorie;
+    private ComboBox<String> categorieComboBox;
 
     @FXML
     private ComboBox<String> couleurs;
@@ -63,7 +66,14 @@ public class AjouterProduit {
     void addProduit(ActionEvent event) throws SQLException {
         double prixValue = Double.parseDouble(prix.getText());
         int stockValue = Integer.parseInt(stock.getText());
-        int idCategorie = Integer.parseInt(categorie.getText());
+        int idCategorie = getCategorieIdByName(categorieComboBox.getValue());
+        if (idCategorie == -1) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur Catégorie");
+            alert.setContentText("La catégorie sélectionnée est invalide.");
+            alert.showAndWait();
+            return;
+        }
 
         ps.add(new produit(reference.getText(),
                 nom.getText(),
@@ -159,6 +169,28 @@ public class AjouterProduit {
             alert.setContentText("Veuillez sélectionner une image.");
             alert.showAndWait();
         }
+    }
+    @FXML
+    public void initialize() {
+        loadCategories();
+    }
+
+    private void loadCategories() {
+        CategorieService categorieService = new CategorieService();
+        List<categorie> categories = categorieService.display();
+        for (categorie cat : categories) {
+            categorieComboBox.getItems().add(cat.getNom());
+        }
+    }
+    private int getCategorieIdByName(String nomCategorie) {
+        CategorieService categorieService = new CategorieService();
+        List<categorie> categories = categorieService.display();
+        for (categorie cat : categories) {
+            if (cat.getNom().equals(nomCategorie)) {
+                return cat.getIdCategorie();
+            }
+        }
+        return -1; // Retourne -1 si la catégorie n'existe pas
     }
 
 }

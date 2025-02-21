@@ -57,7 +57,7 @@
                                 <Font name="Bell MT" size="12.0" />
                             </font>
                         </TextField>
-                        <ComboBox fx:id="couleursf" layoutX="20.0" layoutY="20.0" minHeight="30.0" prefHeight="20.0" prefWidth="170.0" promptText="Couleurs disponibles" styleClass="text-field" stylesheets="@style.css" translateX="20.0" translateY="40.0">
+                        <ComboBox fx:id="couleursf" layoutX="20.0" layoutY="20.0" minHeight="30.0" prefHeight="45.0" prefWidth="170.0" promptText="Couleurs disponibles" styleClass="text-field" stylesheets="@style.css" translateX="20.0" translateY="40.0">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Rouge" />
@@ -73,7 +73,7 @@
                 </Group>
                 <Group layoutX="195.0" layoutY="11.0" translateY="60.0">
                     <children>
-                        <ComboBox id="statusf" fx:id="statusf" layoutX="10.0" layoutY="18.0" minHeight="20.0" prefHeight="30.0" prefWidth="170.0" promptText="Status du Produit" styleClass="text-field" stylesheets="@style.css" translateX="20.0" translateY="40.0">
+                        <ComboBox id="statusf" fx:id="statusf" layoutX="10.0" layoutY="18.0" minHeight="20.0" prefHeight="45.0" prefWidth="170.0" promptText="Status du Produit" styleClass="text-field" stylesheets="@style.css" translateX="10.0" translateY="40.0">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Disponible" />
@@ -83,11 +83,8 @@
                             </items>
                         </ComboBox>
 
-                        <TextField id="categorief" fx:id="categorief" alignment="TOP_RIGHT" cacheShape="false" layoutX="10.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="170.0" promptText="Categorie du Produit" stylesheets="@style.css" translateX="215.0" translateY="40.0">
-                            <font>
-                                <Font name="Bell MT" size="12.0" />
-                            </font>
-                        </TextField>
+                        <ComboBox fx:id="categoriefComboBox" promptText="Sélectionner une catégorie" styleClass="text-field" stylesheets="@style.css" />
+
                     </children>
                 </Group>
                 <Group layoutX="195.0" layoutY="41.0" translateX="-80.0" translateY="85.0">

@@ -106,4 +106,32 @@ public class AjouterCategorie {
             alert.showAndWait();
         }
     }
+    @FXML
+    void listprodctg(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la nouvelle scène
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TousLesProduits.fxml"));
+
+            // Créer la nouvelle scène
+            Parent root = loader.load();
+
+            // Obtenir la fenêtre actuelle (Stage)
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Changer la scène avec la nouvelle
+            currentStage.setScene(new Scene(root));
+
+            // Afficher la nouvelle scène
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Vous pouvez afficher une alerte si le fichier FXML n'est pas trouvé ou si une erreur se produit
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Problème de chargement");
+            alert.setContentText("Une erreur est survenue lors du chargement de la page.");
+            alert.showAndWait();
+        }
+    }
+
 }

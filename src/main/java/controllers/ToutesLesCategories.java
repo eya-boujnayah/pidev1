@@ -82,7 +82,8 @@ public class ToutesLesCategories {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsCategorie.fxml"));
             Scene detailsScene = new Scene(loader.load());
             DetailsCategorie controller = loader.getController();
-           controller.setCategorie(categorie);
+            controller.setCategorieById(categorie.getIdCategorie());
+
             Stage detailsStage = new Stage();
             detailsStage.setTitle("Détails de la catégorie");
             detailsStage.setScene(detailsScene);

@@ -57,6 +57,7 @@
                     </children>
                 </HBox>
                 <Button id="listcategorie" fx:id="listcategorie" maxWidth="148.0" mnemonicParsing="false" onAction="#listCategorie" prefHeight="42.0" prefWidth="127.0" styleClass="action-button" stylesheets="@style.css" text="Liste Categorie" translateX="45.0" />
+            <Button id="listprodctg" fx:id="listprodctg" maxWidth="148.0" mnemonicParsing="false" onAction="#listprodctg" prefHeight="42.0" prefWidth="127.0" styleClass="action-button" stylesheets="@style.css" text="Liste Produit" translateX="45.0" translateY="20.0" />
             </children>
         </VBox>
         <Label contentDisplay="CENTER" layoutX="31.0" layoutY="34.0" prefHeight="65.0" prefWidth="483.0" stylesheets="@style.css" text="Nouvelle Categorie " textAlignment="CENTER" translateX="80.0" translateY="-30.0">

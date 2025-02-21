@@ -87,5 +87,39 @@ public class CategorieService implements IService<categorie> {
 
         return categories;
     }
+    public categorie getCategorieById(int id) {
+        for (categorie cat : display()) { // display() doit renvoyer la liste des catégories
+            if (cat.getIdCategorie() == id) {
+                return cat;
+            }
+        }
+        return null; // Retourne null si aucune catégorie ne correspond à l'ID
+    }
+
+    public categorie getCategorieByNom(String nom) {
+        categorie category = null;
+        String query = "SELECT * FROM categorie WHERE nom = ?";
+
+        try (PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, nom);  // Set the category name in the query
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                // Create a new categorie object and set the properties
+                category = new categorie();
+                category.setIdCategorie(rs.getInt("idCategorie"));
+                category.setReference(rs.getString("reference"));
+                category.setNom(rs.getString("nom"));
+                category.setDescription(rs.getString("description"));
+                category.setDateCreation(rs.getDate("date_creation"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return category;  // Return the category object or null if not found
+    }
+
+
 
 }

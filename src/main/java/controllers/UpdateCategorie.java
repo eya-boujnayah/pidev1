@@ -2,19 +2,19 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.categorie;
 import service.CategorieService;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
 public class UpdateCategorie {
+
+    @FXML
+    private ComboBox<categorie> categoriefComboBox;
 
     @FXML
     private Button AnnulerUpdate;
@@ -67,36 +67,39 @@ public class UpdateCategorie {
         ((Button) event.getSource()).getScene().getWindow().hide();
     }
 
+
+
     @FXML
     void updateCategorie(ActionEvent event) {
         try {
-            // Update the category with the new values
+            // Mettre à jour les informations de la catégorie
             currentCategorie.setNom(nomf.getText());
             currentCategorie.setDescription(descriptionf.getText());
             currentCategorie.setReference(codef.getText());
 
-            // Convert the LocalDate from the DatePicker to java.util.Date
+            // Convertir LocalDate en java.util.Date
             LocalDate localDate = dateuc.getValue();
             if (localDate != null) {
                 Date dateCreation = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 currentCategorie.setDateCreation(dateCreation);
             }
 
-            // Call the service to update the category in the database
+            // Créer une instance de CategorieService pour sauvegarder
             CategorieService categorieService = new CategorieService();
-            categorieService.update(currentCategorie);
+            categorieService.update(currentCategorie); // Appeler la méthode update sur l'instance
 
-            // Show a confirmation message
+            // Afficher un message de succès
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Mise à jour réussie");
             alert.setHeaderText("Catégorie mise à jour avec succès");
             alert.setContentText("Les informations de la catégorie ont été mises à jour.");
             alert.showAndWait();
 
-            // Close the window after updating
+            // Fermer la fenêtre après la mise à jour
             ((Button) event.getSource()).getScene().getWindow().hide();
         } catch (Exception e) {
             e.printStackTrace();
+            // Afficher un message d'erreur en cas d'échec
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText("Échec de la mise à jour");
@@ -104,4 +107,8 @@ public class UpdateCategorie {
             alert.showAndWait();
         }
     }
+
+
+
+
 }

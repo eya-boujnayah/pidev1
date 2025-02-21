@@ -53,12 +53,12 @@
             </Group>
             <Group layoutX="195.0" layoutY="-20.0" translateY="45.0">
                <children>
-                  <TextField id="stock" fx:id="stock" alignment="TOP_LEFT" cacheShape="false" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="170.0" promptText="Stock disponible" stylesheets="@style.css" translateX="-160.0" translateY="50.0">
+                  <TextField id="stock" fx:id="stock" alignment="TOP_LEFT" cacheShape="false" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="170.0" promptText="Stock disponible" stylesheets="@style.css" translateX="-160.0" translateY="55.0">
                      <font>
                         <Font name="Bell MT" size="12.0" />
                      </font>
                   </TextField>
-                  <ComboBox id="couleurs" fx:id="couleurs" minHeight="25.0" prefHeight="20.0" prefWidth="170.0" promptText="Couleurs disponibles" styleClass="text-field" stylesheets="@style.css" translateX="35.0" translateY="60.0">
+                  <ComboBox id="couleurs" fx:id="couleurs" minHeight="25.0" prefHeight="45.0" prefWidth="170.0" promptText="Couleurs disponibles" styleClass="text-field" stylesheets="@style.css" translateX="35.0" translateY="60.0">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Rouge" />
@@ -72,9 +72,9 @@
                   </ComboBox>
                </children>
             </Group>
-            <Group layoutX="195.0" layoutY="11.0" translateY="60.0">
+            <Group layoutX="195.0" layoutY="11.0" translateY="50.0">
                <children>
-                  <ComboBox id="status" fx:id="status" layoutX="10.0" layoutY="18.0" minHeight="20.0" prefHeight="30.0" prefWidth="170.0" promptText="Status du Produit" styleClass="text-field" stylesheets="@style.css" translateX="-110.0" translateY="40.0">
+                  <ComboBox id="status" fx:id="status" layoutX="10.0" layoutY="18.0" minHeight="20.0" prefHeight="45.0" prefWidth="170.0" promptText="Status du Produit" styleClass="text-field" stylesheets="@style.css" translateX="-250.0" translateY="40.0">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Disponible" />
@@ -82,11 +82,8 @@
                          </FXCollections>
                      </items>
                   </ComboBox>
-                  <TextField id="categorie" fx:id="categorie" alignment="TOP_RIGHT" cacheShape="false" layoutX="20.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefColumnCount="0" prefHeight="30.0" prefWidth="166.0" promptText="Categorie du Produit" stylesheets="@style.css" translateX="60.0" translateY="40.0">
-                     <font>
-                        <Font name="Bell MT" size="12.0" />
-                     </font>
-                  </TextField>
+                  <ComboBox fx:id="categorieComboBox" maxHeight="200.0" maxWidth="180.0" minWidth="30.0" prefHeight="30.0" prefWidth="180.0" promptText="Sélectionner une catégorie" styleClass="text-field" stylesheets="@style.css" translateX="-50.0" translateY="60.0" />
+
                </children>
             </Group>
             <Group layoutX="195.0" layoutY="41.0" translateX="-90.0" translateY="70.0">

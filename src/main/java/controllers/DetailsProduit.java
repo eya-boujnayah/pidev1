@@ -6,7 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.categorie;
 import model.produit;
+import service.CategorieService;
 import service.ProduitService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,6 +36,9 @@ public class DetailsProduit {
 
     private ProduitService produitService = new ProduitService(); // Création d'une instance de ProduitService
 
+    // Ajouter l'attribut CategorieService
+    CategorieService categorieService = new CategorieService();
+
     // Méthode pour définir les détails du produit
     public void setProduit(produit produit) {
         this.produitActuel = produit;
@@ -45,11 +50,15 @@ public class DetailsProduit {
         labelStock.setText("Stock : " + produit.getStock());
         labelCouleurs.setText("Couleurs : " + produit.getCouleurs());
         labelStatus.setText("Statut : " + produit.getStatus());
-        labelIdCategorie.setText("Catégorie : " + produit.getIdCategorie());
+
+        // Récupérer la catégorie et afficher son nom
+        categorie cat = categorieService.getCategorieById(produit.getIdCategorie());
+        labelIdCategorie.setText(" Catégorie : " + (cat != null ? cat.getNom() : "Inconnu"));
 
         // Ajouter l'affichage de l'image si le path est valide
         afficherImage(produit.getImagepath());
     }
+
 
     // Méthode pour afficher l'image du produit
     private void afficherImage(String imagePath) {
