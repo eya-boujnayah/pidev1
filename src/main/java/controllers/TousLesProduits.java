@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 public class TousLesProduits {
 
@@ -35,6 +36,7 @@ public class TousLesProduits {
 
     private final ProduitService produitService = new ProduitService();
     private ObservableList<produit> produits;
+    private boolean isSortedByCategory = false;  // Variable pour suivre l'état du tri
 
     @FXML
     public void initialize() {
@@ -154,6 +156,35 @@ public class TousLesProduits {
     }
 
     public void refreshList() {
-        produits.setAll(produitService.display()); // Recharge les produits
+        ObservableList<produit> produits;
+        if (isSortedByCategory) {
+            // Si trié par catégorie, utiliser la méthode qui trie par catégorie
+            produits = FXCollections.observableArrayList(produitService.getProduitsTriesParNom());
+        } else {
+            // Si non trié, afficher la liste normale des produits
+            produits = FXCollections.observableArrayList(produitService.display());
+        }
+
+        // Mettre à jour la ListView avec les produits
+        listViewProduits.setItems(produits);  // Rafraîchit la liste avec les nouveaux produits
     }
+
+
+    @FXML
+private void sortByCategory(ActionEvent event) {
+    if (isSortedByCategory) {
+        // Si déjà triés, afficher l'état normal
+        List<produit> produits = produitService.display();  // Récupérer les produits sans tri
+        listViewProduits.getItems().clear();
+        listViewProduits.getItems().addAll(produits);
+    } else {
+        // Si non triés, trier par catégorie
+        List<produit> produitsTries = produitService.getProduitsTriesParNom();
+        listViewProduits.getItems().clear();
+        listViewProduits.getItems().addAll(produitsTries);
+    }
+
+    // Basculer l'état du tri
+    isSortedByCategory = !isSortedByCategory;
+}
 }

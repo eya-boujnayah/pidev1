@@ -96,6 +96,35 @@ public class ProduitService implements IService<produit>{
 
         return produits;
     }
+    public List<produit> getProduitsTriesParNom() {
+        String query = "SELECT * FROM produit ORDER BY nom ASC";  // Trier par idCategorie
+        List<produit> produits = new ArrayList<>();
+
+        try (Statement statement = con.createStatement();
+             ResultSet rs = statement.executeQuery(query)) {
+
+            while (rs.next()) {
+                produit p = new produit();
+                p.setIdProduit(rs.getInt("idProduit"));
+                p.setReference(rs.getString("reference"));
+                p.setNom(rs.getString("nom"));
+                p.setDescription(rs.getString("description"));
+                p.setStatus(rs.getString("status"));
+                p.setMarque(rs.getString("marque"));
+                p.setPrix(rs.getDouble("prix"));
+                p.setStock(rs.getInt("stock"));
+                p.setCouleurs(rs.getString("couleurs"));
+                p.setImagepath(rs.getString("imagepath"));
+                p.setIdCategorie(rs.getInt("idCategorie"));
+                produits.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erreur lors du tri des produits : " + e.getMessage());
+        }
+
+        return produits;
+    }
 
 
 }
