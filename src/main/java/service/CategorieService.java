@@ -1,9 +1,11 @@
 package service;
 
+import javafx.scene.control.Alert;
 import model.categorie;
 import utils.MyDatabse;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +121,61 @@ public class CategorieService implements IService<categorie> {
 
         return category;  // Return the category object or null if not found
     }
+    // Fonction pour valider une catégorie avant de l'ajouter
+    public boolean isValidCategorie(categorie cat) {
+        return isReferenceValid(cat.getReference()) &&
+                isNomValid(cat.getNom()) &&
+                isDescriptionValid(cat.getDescription()) &&
+                isDateValid(new java.sql.Date(cat.getDateCreation().getTime())); // Convertir en java.sql.Date
+    }
 
+
+    // Vérification que la référence a exactement 4 caractères
+    public boolean isReferenceValid(String reference) {
+        return reference != null && reference.length() == 4;
+    }
+
+    // Vérification que le nom n'est pas vide
+    public boolean isNomValid(String nom) {
+        return nom != null && !nom.trim().isEmpty();
+    }
+
+    // Vérification que la description n'est pas vide
+    public boolean isDescriptionValid(String description) {
+        return description != null && !description.trim().isEmpty();
+    }
+
+    // Vérification que la date est antérieure à aujourd'hui
+    public boolean isDateValid(Date date) {
+        return date != null && date.toLocalDate().isBefore(LocalDate.now());
+    }
+
+    // Ajout d'une catégorie avec contrôle de validation
+    public boolean addCategorie(categorie cat) {
+        if (!isValidCategorie(cat)) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Les données de la catégorie ne sont pas valides !");
+            return false;
+        }
+
+        try {
+            // Ici, tu devrais insérer la catégorie dans la base de données
+            System.out.println("Catégorie ajoutée avec succès : " + cat.getNom());
+            showAlert(Alert.AlertType.CONFIRMATION, "Succès", "Catégorie ajoutée avec succès !");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de l'ajout.");
+            return false;
+        }
+    }
+
+    // Méthode utilitaire pour afficher une alerte
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
 
 }

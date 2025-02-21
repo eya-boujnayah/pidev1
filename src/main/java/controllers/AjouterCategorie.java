@@ -40,25 +40,30 @@ public class AjouterCategorie {
 
     @FXML
     void addCategorie(ActionEvent event) {
-        // Vérification si les champs sont remplis
-        if (reference.getText().isEmpty() || nom.getText().isEmpty() || description.getText().isEmpty() || datecreation.getValue() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Tous les champs doivent être remplis !");
-            alert.showAndWait();
-            return;
-        }
-
         try {
             // Conversion de la date
             LocalDate localDate = datecreation.getValue();
-            Date sqlDate = Date.valueOf(localDate);
+            Date sqlDate = (localDate != null) ? Date.valueOf(localDate) : null;
 
-            // Création d'une nouvelle catégorie
-            categorie newCategorie = new categorie(reference.getText(),
+            // Création de la nouvelle catégorie
+            categorie newCategorie = new categorie(
+                    reference.getText(),
                     nom.getText(),
                     description.getText(),
-                    sqlDate);
+                    sqlDate
+            );
+
+            // Vérification de la validité de la catégorie
+            if (!cs.isValidCategorie(newCategorie)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Vérifiez vos données :\n"
+                        + "- Référence : exactement 4 caractères\n"
+                        + "- Nom et description : non vides\n"
+                        + "- Date : antérieure à aujourd'hui");
+                alert.showAndWait();
+                return;
+            }
 
             // Ajout de la catégorie dans la base de données
             cs.add(newCategorie);
@@ -76,11 +81,10 @@ public class AjouterCategorie {
             datecreation.setValue(null);
 
         } catch (Exception e) {
-            // Gestion générale des erreurs (y compris SQLException)
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
-            alert.setContentText("Il y a eu une erreur lors de l'ajout de la catégorie.");
+            alert.setContentText("Une erreur s'est produite lors de l'ajout de la catégorie.");
             alert.showAndWait();
         }
     }

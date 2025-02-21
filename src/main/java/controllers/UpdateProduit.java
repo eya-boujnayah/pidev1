@@ -105,54 +105,65 @@ public class UpdateProduit {
         categoriefComboBox.setItems(categoryNames);  // Assigner les catégories au ComboBox
     }
 
+
     @FXML
     void updateProduit(ActionEvent event) {
         try {
-            // Validation et mise à jour du produit avec les nouvelles valeurs
-            currentProduct.setNom(nomf.getText());
+            // Vérification des champs obligatoires
+            if (nomf.getText().isEmpty() || prixf.getText().isEmpty() || descriptionf.getText().isEmpty() ||
+                    imagepathf.getText().isEmpty() || marquef.getText().isEmpty() || referencef.getText().isEmpty() ||
+                    couleursf.getSelectionModel().isEmpty() || statusf.getSelectionModel().isEmpty()) {
 
-            // Validation du prix
+                showError("Champs Obligatoires", "Tous les champs doivent être remplis.");
+                return;
+            }
+
+            // Validation du prix (doit être > 0)
+            double prix;
             try {
-                double prix = Double.parseDouble(prixf.getText());
-                currentProduct.setPrix(prix);
+                prix = Double.parseDouble(prixf.getText());
+                if (prix <= 0) {
+                    showError("Prix invalide", "Le prix doit être supérieur à 0.");
+                    return;
+                }
             } catch (NumberFormatException e) {
                 showError("Prix invalide", "Veuillez entrer un prix valide.");
                 return;
             }
+            currentProduct.setPrix(prix);
 
             // Validation de l'ID de catégorie
-            try {
-                currentProduct.setIdCategorie(getCategorieIdByName(categoriefComboBox.getValue()));  // Utilisation de l'ID de la catégorie sélectionnée
-            } catch (NumberFormatException e) {
+            int idCategorie = getCategorieIdByName(categoriefComboBox.getValue());
+            if (idCategorie == -1) {
                 showError("ID de catégorie invalide", "Veuillez entrer une catégorie valide.");
                 return;
             }
 
+            // Mise à jour des propriétés du produit
+            currentProduct.setNom(nomf.getText());
             currentProduct.setDescription(descriptionf.getText());
             currentProduct.setImagepath(imagepathf.getText());
             currentProduct.setMarque(marquef.getText());
             currentProduct.setReference(referencef.getText());
+            currentProduct.setStatus(statusf.getSelectionModel().getSelectedItem());
+            currentProduct.setCouleurs(couleursf.getSelectionModel().getSelectedItem());
+            currentProduct.setIdCategorie(idCategorie);
 
-            // Validation du statut et des couleurs
-            String selectedStatus = statusf.getSelectionModel().getSelectedItem();
-            if (selectedStatus != null) {
-                currentProduct.setStatus(selectedStatus);
-            }
-
-            String selectedCouleur = couleursf.getSelectionModel().getSelectedItem();
-            if (selectedCouleur != null) {
-                currentProduct.setCouleurs(selectedCouleur);
-            }
-
-            // Validation du stock
+            // Validation du stock (doit être >= 0)
+            int stock;
             try {
-                currentProduct.setStock(Integer.parseInt(stockf.getText()));
+                stock = Integer.parseInt(stockf.getText());
+                if (stock < 0) {
+                    showError("Stock invalide", "Le stock doit être supérieur ou égal à 0.");
+                    return;
+                }
             } catch (NumberFormatException e) {
                 showError("Stock invalide", "Veuillez entrer un nombre valide pour le stock.");
                 return;
             }
+            currentProduct.setStock(stock);
 
-            // Appel au service pour mettre à jour le produit dans la base de données
+            // Mise à jour du produit dans la base de données
             ProduitService produitService = new ProduitService();
             produitService.update(currentProduct);
 
@@ -163,7 +174,7 @@ public class UpdateProduit {
             alert.setContentText("Les informations du produit ont été mises à jour.");
             alert.showAndWait();
 
-            // Récupérer le Stage actuel
+            // Récupérer le Stage actuel et mettre à jour la liste des produits
             Stage stage = (Stage) updateProduit.getScene().getWindow();
             if (stage != null && stage.getOwner() != null) {
                 TousLesProduits mainController = (TousLesProduits) stage.getOwner().getUserData();
@@ -179,6 +190,8 @@ public class UpdateProduit {
             showError("Erreur de mise à jour", "Une erreur s'est produite lors de la mise à jour du produit.");
         }
     }
+
+
 
     // Affichage d'une fenêtre d'erreur
     private void showError(String header, String content) {

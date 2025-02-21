@@ -67,12 +67,17 @@ public class UpdateCategorie {
         ((Button) event.getSource()).getScene().getWindow().hide();
     }
 
-
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
     @FXML
     void updateCategorie(ActionEvent event) {
         try {
-            // Mettre à jour les informations de la catégorie
+            // Récupérer les valeurs saisies
             currentCategorie.setNom(nomf.getText());
             currentCategorie.setDescription(descriptionf.getText());
             currentCategorie.setReference(codef.getText());
@@ -84,29 +89,37 @@ public class UpdateCategorie {
                 currentCategorie.setDateCreation(dateCreation);
             }
 
-            // Créer une instance de CategorieService pour sauvegarder
+            // Créer une instance de CategorieService pour valider
             CategorieService categorieService = new CategorieService();
+
+            // Appeler la méthode de validation avant de mettre à jour
+            if (!categorieService.isValidCategorie(currentCategorie)) {
+                // Si la validation échoue, afficher un message d'erreur
+                showAlert(Alert.AlertType.ERROR, "Erreur de validation",
+                        "Les données saisies ne sont pas valides !\n" +
+                                "- La référence doit avoir exactement 4 caractères.\n" +
+                                "- Le nom ne peut pas être vide.\n" +
+                                "- La description ne peut pas être vide.\n" +
+                                "- La date de création doit être antérieure à la date actuelle.");
+                return;  // Arrêter l'exécution de la méthode
+            }
+
+            // Si la validation est réussie, procéder à la mise à jour
             categorieService.update(currentCategorie); // Appeler la méthode update sur l'instance
 
             // Afficher un message de succès
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Mise à jour réussie");
-            alert.setHeaderText("Catégorie mise à jour avec succès");
-            alert.setContentText("Les informations de la catégorie ont été mises à jour.");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.INFORMATION, "Mise à jour réussie", "Les informations de la catégorie ont été mises à jour.");
 
             // Fermer la fenêtre après la mise à jour
             ((Button) event.getSource()).getScene().getWindow().hide();
         } catch (Exception e) {
             e.printStackTrace();
             // Afficher un message d'erreur en cas d'échec
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Échec de la mise à jour");
-            alert.setContentText("Vérifiez les données saisies.");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de la mise à jour.");
         }
     }
+
+
 
 
 

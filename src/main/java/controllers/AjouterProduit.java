@@ -64,8 +64,57 @@ public class AjouterProduit {
 
     @FXML
     void addProduit(ActionEvent event) throws SQLException {
-        double prixValue = Double.parseDouble(prix.getText());
-        int stockValue = Integer.parseInt(stock.getText());
+        // Vérification des champs obligatoires
+        if (reference.getText().isEmpty() || nom.getText().isEmpty() || description.getText().isEmpty() ||
+                prix.getText().isEmpty() || marque.getText().isEmpty() || stock.getText().isEmpty() ||
+                couleurs.getSelectionModel().isEmpty() || status.getSelectionModel().isEmpty()) {
+
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur de Saisie");
+            alert.setContentText("Tous les champs sont obligatoires.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Vérification du prix (doit être > 0)
+        double prixValue;
+        try {
+            prixValue = Double.parseDouble(prix.getText());
+            if (prixValue <= 0) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur de Saisie");
+                alert.setContentText("Le prix doit être supérieur à 0.");
+                alert.showAndWait();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur de Saisie");
+            alert.setContentText("Veuillez entrer un prix valide.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Vérification du stock (doit être >= 0)
+        int stockValue;
+        try {
+            stockValue = Integer.parseInt(stock.getText());
+            if (stockValue < 0) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur de Saisie");
+                alert.setContentText("Le stock doit être supérieur ou égal à 0.");
+                alert.showAndWait();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur de Saisie");
+            alert.setContentText("Veuillez entrer un stock valide.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Validation de la catégorie
         int idCategorie = getCategorieIdByName(categorieComboBox.getValue());
         if (idCategorie == -1) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -75,15 +124,16 @@ public class AjouterProduit {
             return;
         }
 
+        // Ajouter le produit
         ps.add(new produit(reference.getText(),
                 nom.getText(),
                 description.getText(),
                 prixValue,
                 marque.getText(),
                 stockValue,
-                couleurs.getSelectionModel().getSelectedItem(), // Changement ici
+                couleurs.getSelectionModel().getSelectedItem(),
                 status.getSelectionModel().getSelectedItem(),
-                imagepath.getText(),  // Chemin de l'image
+                imagepath.getText(),
                 idCategorie));
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -103,6 +153,7 @@ public class AjouterProduit {
         imagepath.clear();
         imageView.setImage(null);  // Réinitialiser l'image affichée
     }
+
 
     @FXML
     void listproduit(ActionEvent event) {
