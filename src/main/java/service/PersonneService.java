@@ -11,7 +11,7 @@ public class PersonneService implements IService<Personne>{
 
     Connection con ;
 
-    public PersonneService(){
+    public PersonneService() throws SQLException {
         con = MyDatabse.getInstance().getCon();
 
     }

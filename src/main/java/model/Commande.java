@@ -1,19 +1,22 @@
 package model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Commande {
     private int idCommande;
-    private utilisateur idUtilisateur;
+    private Utilisateur idUtilisateur;
     private float prixCommande;
     private String statutCommande;
     private Date dateCommande;
-
+    private List<CommandeProduit> produits;
     // Constructeur sans arguments
     public Commande() {
     }
 
-    public Commande(int idCommande, utilisateur idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
+    public Commande(int idCommande, Utilisateur idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
         this.idCommande = idCommande;
         this.idUtilisateur = idUtilisateur;
         this.prixCommande = prixCommande;
@@ -21,7 +24,7 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
-    public Commande(utilisateur idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
+    public Commande(Utilisateur idUtilisateur, float prixCommande, String statutCommande, Date dateCommande) {
         this.idUtilisateur = idUtilisateur;
         this.prixCommande = prixCommande;
         this.statutCommande = statutCommande;
@@ -39,11 +42,11 @@ public class Commande {
         this.idCommande = idCommande;
     }
 
-    public utilisateur getIdUtilisateur() {
+    public Utilisateur getIdUtilisateur() {
         return idUtilisateur;
     }
 
-    public void setIdUtilisateur(utilisateur idUtilisateur) {
+    public void setIdUtilisateur(Utilisateur idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
     }
 
@@ -70,4 +73,21 @@ public class Commande {
     public void setDateCommande(Date dateCommande) {
         this.dateCommande = dateCommande;
     }
+
+
+    public List<CommandeProduit> getProduits() {
+        return produits;
+    }
+
+
+
+    public Map<produit, Integer> getPanier() {
+        Map<produit, Integer> panier = new HashMap<>();
+        for (CommandeProduit commandeProduit : produits) {
+            panier.put(commandeProduit.getProduit(), commandeProduit.getQuantite());
+        }
+        return panier;
+    }
+
+
 }

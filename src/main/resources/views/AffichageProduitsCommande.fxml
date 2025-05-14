@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AffichageProduitsCommande">
+    <children>
+        <ListView fx:id="listViewProduits" layoutX="14.0" layoutY="8.0" prefHeight="262.0" prefWidth="360.0"/>
+        <Button layoutX="242.0" layoutY="273.0" onAction="#closeWindow" text="Fermer" style="-fx-background-color: #e32b1c; -fx-text-fill: white;"/>
+    </children>
+</AnchorPane>

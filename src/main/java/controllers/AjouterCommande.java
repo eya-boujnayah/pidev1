@@ -8,11 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Commande;
-import model.utilisateur;
+import model.Utilisateur;
 import service.CommandeService;
 import service.PersonneService;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class AjouterCommande {
     private TextField statutCommande;
 
     @FXML
-    private ChoiceBox<utilisateur> idUtilisateur;
+    private ChoiceBox<Utilisateur> idUtilisateur;
 
     @FXML
     private Button btnAjouter;
@@ -40,13 +41,16 @@ public class AjouterCommande {
 
     private CommandeService cs = new CommandeService();
 
+    public AjouterCommande() throws SQLException {
+    }
+
     @FXML
     public void initialize() {
         loadUtilisateurs(); // Charger les utilisateurs dans le ChoiceBox
     }
 
     private void loadUtilisateurs() {
-        List<utilisateur> utilisateurs = cs.getAllUtilisateurs();
+        List<Utilisateur> utilisateurs = cs.getAllUtilisateurs();
         idUtilisateur.getItems().setAll(utilisateurs);
     }
 
@@ -58,7 +62,7 @@ public class AjouterCommande {
         }
 
         try {
-            utilisateur user = idUtilisateur.getValue();
+            Utilisateur user = idUtilisateur.getValue();
             float prix = Float.parseFloat(prixCommande.getText());
             String statut = statutCommande.getText();
             LocalDate localDate = dateCommande.getValue();

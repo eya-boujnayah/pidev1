@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FactureController">
+    <children>
+        <AnchorPane prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: white;">
+            <children>
+                <!-- Menu de navigation -->
+                <AnchorPane prefHeight="510.0" prefWidth="184.0" style="-fx-background-color: #154388; -fx-border-radius: 10px;">
+                    <children>
+                        <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="28.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@logo.png" />
+                            </image>
+                        </ImageView>
+
+                        <Button fx:id="backH" layoutX="45.0" layoutY="416.0" mnemonicParsing="false" onAction="#backH" style="-fx-background-color: #ffcc00; -fx-text-fill: black; -fx-font-size: 14px; -fx-background-radius: 5px;" text="⬅ Retour" />
+                    </children>
+                </AnchorPane>
+
+                <!-- Titre principal -->
+                <Text fill="#1a45b1" layoutX="311.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valider Facture" textAlignment="CENTER" wrappingWidth="272.7999267578125">
+                    <font>
+                        <Font name="Bell MT Italic" size="35.0" />
+                    </font>
+                </Text>
+
+                <!-- Conteneur principal avec border-radius et ombre -->
+                <AnchorPane layoutX="216.0" layoutY="63.0" prefHeight="429.0" prefWidth="483.0" style="-fx-background-color: #154388; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-effect: dropshadow(gaussian, #000000, 10, 0, 2, 2);">
+                    <children>
+                        <!-- Adresse de livraison -->
+                        <VBox alignment="center" layoutX="54.0" layoutY="38.0" prefHeight="90.0" prefWidth="374.0" spacing="10" style="-fx-padding: 15px; -fx-background-color: #ffffff; -fx-border-radius: 8px; -fx-border-color: #bdc3c7; -fx-border-width: 1px;">
+                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Adresse de Livraison:" />
+                            <TextField fx:id="adresseLivraisonField" prefHeight="30.0" prefWidth="380.0" promptText="Entrez l'adresse de livraison" style="-fx-font-size: 14px; -fx-padding: 8px; -fx-border-radius: 5px; -fx-border-color: #bdc3c7" />
+                        </VBox>
+
+                        <!-- Type de paiement -->
+                        <VBox alignment="center" layoutX="54.0" layoutY="128.0" prefHeight="90.0" prefWidth="374.0" spacing="10" style="-fx-padding: 15px; -fx-background-color: #ffffff; -fx-border-radius: 8px; -fx-border-color: #bdc3c7; -fx-border-width: 1px;">
+                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Type de Paiement:" />
+                            <ComboBox fx:id="typePaiementComboBox" prefHeight="30.0" prefWidth="380.0" style="-fx-font-size: 14px; -fx-padding: 8px; -fx-border-radius: 5px; -fx-border-color: #bdc3c7">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Carte bancaire" />
+                                        <String fx:value="PayPal" />
+                                        <String fx:value="Virement bancaire" />
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+                        </VBox>
+
+                        <!-- Prix Total -->
+                        <VBox alignment="center" layoutX="54.0" layoutY="237.0" prefHeight="75.0" prefWidth="374.0" spacing="10" style="-fx-padding: 15px; -fx-background-color: #ffffff; -fx-border-radius: 8px; -fx-border-color: #bdc3c7; -fx-border-width: 1px;">
+                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Prix Total:" />
+                            <TextField fx:id="prixTotalField" editable="false" prefHeight="30.0" prefWidth="380.0" promptText="Prix total" style="-fx-font-size: 14px; -fx-padding: 8px; -fx-border-radius: 5px; -fx-border-color: #bdc3c7" />
+                        </VBox>
+
+                        <!-- Validation de la facture -->
+                        <Button layoutX="57.0" layoutY="350.0" onAction="#validerFacture" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-padding: 10px 20px;" text="Valider la Facture" />
+                        <Button fx:id="downloadFactureButton" layoutX="238.0" layoutY="350.0" onAction="#downloadFacture" style="-fx-background-color: #ffc107; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-padding: 10px 20px;" text="Télécharger Facture">
+                     <font>
+                        <Font size="6.0" />
+                     </font></Button>
+
+                    </children>
+                </AnchorPane>
+
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

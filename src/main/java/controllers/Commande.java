@@ -7,30 +7,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.CommandeService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Commande {
     @FXML
-    private TableView<model.Commande> tableviewUser;
+    private TextField searchField; // Champ de recherche
     @FXML
-    private TableColumn<model.Commande, Integer> idCommande;
+    private Button searchButton;  // Bouton de recherche
+
     @FXML
-    private TableColumn<model.Commande, Integer> idUtilisateur;
-    @FXML
-    private TableColumn<model.Commande, Float> prixCommande;
-    @FXML
-    private TableColumn<model.Commande, String> statutCommande;
-    @FXML
-    private TableColumn<model.Commande, String> dateCommande;
+    private ListView<String> listViewUser; // Utilisation d'une ListView
     @FXML
     private Button btnAjouter;
     @FXML
@@ -39,26 +34,29 @@ public class Commande {
     private Button btnSupprimer;
 
     private CommandeService commandeService = new CommandeService();
-    private ObservableList<model.Commande> commandesList = FXCollections.observableArrayList();
+    private ObservableList<String> commandesList = FXCollections.observableArrayList();
+
+    public Commande() throws SQLException {
+    }
 
     @FXML
     public void initialize() {
-        // Associer les colonnes aux propriétés de Commande
-        idCommande.setCellValueFactory(new PropertyValueFactory<>("idCommande"));
-        idUtilisateur.setCellValueFactory(new PropertyValueFactory<>("idUtilisateur")); // Vérifie que idUtilisateur a une méthode getIdUtilisateur() qui retourne un int
-        prixCommande.setCellValueFactory(new PropertyValueFactory<>("prixCommande"));
-        statutCommande.setCellValueFactory(new PropertyValueFactory<>("statutCommande"));
-        dateCommande.setCellValueFactory(new PropertyValueFactory<>("dateCommande"));
-
-        // Charger les données
         loadData();
     }
 
-
     private void loadData() {
         List<model.Commande> commandes = commandeService.display();
-        commandesList.setAll(commandes);
-        tableviewUser.setItems(commandesList);
+        commandesList.clear();
+        for (model.Commande commande : commandes) {
+            String commandeString = String.format("ID: %d, Utilisateur: %s, Prix: %.2f, Statut: %s, Date: %s",
+                    commande.getIdCommande(),
+                    commande.getIdUtilisateur(),
+                    commande.getPrixCommande(),
+                    commande.getStatutCommande(),
+                    commande.getDateCommande());
+            commandesList.add(commandeString);
+        }
+        listViewUser.setItems(commandesList);
     }
 
     @FXML
@@ -76,16 +74,20 @@ public class Commande {
             e.printStackTrace();
         }
     }
+
     @FXML
     public void ModifierCommande(ActionEvent event) {
-        model.Commande selectedCommande = tableviewUser.getSelectionModel().getSelectedItem();
+        String selectedCommandeString = listViewUser.getSelectionModel().getSelectedItem();
 
-        if (selectedCommande != null) {
+        if (selectedCommandeString != null) {
             try {
+                int idCommande = Integer.parseInt(selectedCommandeString.split(",")[0].split(":")[1].trim());
+
+                model.Commande selectedCommande = commandeService.getCommandeById(idCommande);
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/editCommade.fxml"));
                 Parent root = loader.load();
 
-                // Récupérer le contrôleur et lui passer la commande sélectionnée
                 EditCommade modifierController = loader.getController();
                 modifierController.setCommande(selectedCommande);
 
@@ -93,7 +95,7 @@ public class Commande {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-            } catch (IOException e) {
+            } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();
             }
         } else {
@@ -102,14 +104,12 @@ public class Commande {
     }
 
 
-
     @FXML
     public void SupprimerCommande(ActionEvent event) {
-        model.Commande selectedCommande = tableviewUser.getSelectionModel().getSelectedItem();
+        String selectedCommandeString = listViewUser.getSelectionModel().getSelectedItem();
 
-        if (selectedCommande != null) {
-            commandeService.delete(selectedCommande.getIdCommande());
-            commandesList.remove(selectedCommande);
+        if (selectedCommandeString != null) {
+            commandesList.remove(selectedCommandeString);
             System.out.println("Commande supprimée !");
         } else {
             System.out.println("Aucune commande sélectionnée !");
@@ -130,4 +130,44 @@ public class Commande {
             e.printStackTrace();
         }
     }
+
+    public void produits(ActionEvent actionEvent) {
+        String selectedCommandeString = listViewUser.getSelectionModel().getSelectedItem();
+
+        if (selectedCommandeString != null) {
+            try {
+                int idCommande = Integer.parseInt(selectedCommandeString.split(",")[0].split(":")[1].trim());
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AffichageProduitsCommande.fxml"));
+                Parent root = loader.load();
+
+                AffichageProduitsCommande afficherProduitsController = loader.getController();
+                afficherProduitsController.setCommandeProduits(idCommande);
+
+                // Afficher la nouvelle fenêtre
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException | NumberFormatException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Aucune commande sélectionnée !");
+        }
+    }
+
+    @FXML
+    public void searchCommande(ActionEvent event) {
+        String searchText = searchField.getText().toLowerCase();
+
+        ObservableList<String> filteredCommandes = FXCollections.observableArrayList();
+        for (String commande : commandesList) {
+            if (commande.toLowerCase().contains(searchText)) {
+                filteredCommandes.add(commande);
+            }
+        }
+
+        listViewUser.setItems(filteredCommandes);
+    }
+
 }

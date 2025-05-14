@@ -2,60 +2,51 @@ package model;
 
 import java.util.Date;
 
-public class utilisateur {
-    int id;
-    String cin;
+public class Utilisateur {
+    int idUtilisateur;
     String nom;
     String prenom;
-    String adresseEmail;
-    String motDePasse;
+    String email;
+    String mdp;
     String telephone;
     String role;
     Date dateInscription;
     Date dateNaissance;
 
-    public utilisateur() {
+    public Utilisateur() {
     }
-
-    public utilisateur(String cin, String nom, String prenom, String adresseEmail, String motDePasse, String role, String telephone, Date dateInscription, Date dateNaissance) {
-        this.cin = cin;
+    public Utilisateur(int idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
+    public Utilisateur(String nom, String prenom, String email, String mdp, String telephone, String role, Date dateInscription, Date dateNaissance) {
         this.nom = nom;
         this.prenom = prenom;
-        this.adresseEmail = adresseEmail;
-        this.motDePasse = motDePasse;
-        this.role = role;
-        this.telephone = telephone;
-        this.dateInscription = dateInscription;
-        this.dateNaissance = dateNaissance;
-    }
-
-    public utilisateur(int id, String cin, String nom, String prenom, String adresseEmail, String motDePasse, String telephone, String role, Date dateInscription, Date dateNaissance) {
-        this.id = id;
-        this.cin = cin;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresseEmail = adresseEmail;
-        this.motDePasse = motDePasse;
+        this.email = email;
+        this.mdp = mdp;
         this.telephone = telephone;
         this.role = role;
         this.dateInscription = dateInscription;
         this.dateNaissance = dateNaissance;
     }
 
-    public int getId() {
-        return id;
+    public Utilisateur(int idUtilisateur, String nom, String prenom, String email, String mdp, String telephone, String role, Date dateInscription, Date dateNaissance) {
+        this.idUtilisateur = idUtilisateur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mdp = mdp;
+        this.telephone = telephone;
+        this.role = role;
+        this.dateInscription = dateInscription;
+        this.dateNaissance = dateNaissance;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getIdUtilisateur() {
+        return idUtilisateur;
     }
 
-    public String getCin() {
-        return cin;
-    }
-
-    public void setCin(String cin) {
-        this.cin = cin;
+    public void setIdUtilisateur(int idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
     }
 
     public String getNom() {
@@ -66,14 +57,6 @@ public class utilisateur {
         this.nom = nom;
     }
 
-    public String getAdresseEmail() {
-        return adresseEmail;
-    }
-
-    public void setAdresseEmail(String adresseEmail) {
-        this.adresseEmail = adresseEmail;
-    }
-
     public String getPrenom() {
         return prenom;
     }
@@ -82,12 +65,20 @@ public class utilisateur {
         this.prenom = prenom;
     }
 
-    public String getMotDePasse() {
-        return motDePasse;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
     }
 
     public String getTelephone() {
@@ -124,13 +115,12 @@ public class utilisateur {
 
     @Override
     public String toString() {
-        return "utilisateur{" +
-                "id=" + id +
-                ", cin='" + cin + '\'' +
+        return "Utilisateur{" +
+                "idUtilisateur=" + idUtilisateur +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
-                ", adresseEmail='" + adresseEmail + '\'' +
-                ", motDePasse='" + motDePasse + '\'' +
+                ", email='" + email + '\'' +
+                ", mdp='" + mdp + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", role='" + role + '\'' +
                 ", dateInscription=" + dateInscription +

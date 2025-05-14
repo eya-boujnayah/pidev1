@@ -6,12 +6,12 @@ import java.util.Date;
 public class Facture {
     private int idFacture;
     private Commande commande;  // Clé étrangère remplacée par l'objet Commande
-    private utilisateur utilisateur; // Clé étrangère remplacée par l'objet Utilisateur
+    private Utilisateur utilisateur; // Clé étrangère remplacée par l'objet Utilisateur
     private float prixTotal;
     private String typePaiement, adresseLivraison, statutFacture;
     private Date dateFacture;
 
-    public Facture(int idFacture, Commande commande, utilisateur utilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
+    public Facture(int idFacture, Commande commande, Utilisateur utilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
         this.idFacture = idFacture;
         this.commande = commande;
         this.utilisateur = utilisateur;
@@ -22,7 +22,7 @@ public class Facture {
         this.statutFacture = statutFacture;
     }
 
-    public Facture(Commande commande, utilisateur utilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
+    public Facture(Commande commande, Utilisateur utilisateur, float prixTotal, String typePaiement, String adresseLivraison, Date dateFacture, String statutFacture) {
         this.commande = commande;
         this.utilisateur = utilisateur;
         this.prixTotal = prixTotal;
@@ -31,6 +31,7 @@ public class Facture {
         this.dateFacture = dateFacture;
         this.statutFacture = statutFacture;
     }
+
 
     public Facture() {
     }
@@ -46,11 +47,11 @@ public class Facture {
         this.commande = commande;
     }
 
-    public utilisateur getUtilisateur() {
+    public Utilisateur getUtilisateur() {
         return utilisateur;
     }
 
-    public void setUtilisateur(utilisateur utilisateur) {
+    public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
 
@@ -102,7 +103,6 @@ public class Facture {
         this.idFacture = idFacture;
     }
 
-    public void setDateFacture(LocalDate localDate) {
 
-    }
+
 }

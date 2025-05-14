@@ -2,19 +2,23 @@ package service;
 
 import model.Facture;
 import model.Commande;
-import model.utilisateur;
+import model.Utilisateur;
 import utils.MyDatabse;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
 public class FactureService implements IService<Facture> {
 
     private final Connection con;
 
-    public FactureService() {
+    public FactureService() throws SQLException {
         con = MyDatabse.getInstance().getCon();
+
     }
 
     @Override
@@ -23,7 +27,7 @@ public class FactureService implements IService<Facture> {
 
         try (PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.setInt(1, facture.getCommande().getIdCommande());
-            pstmt.setInt(2, facture.getUtilisateur().getId());
+            pstmt.setInt(2, facture.getUtilisateur().getIdUtilisateur());
             pstmt.setFloat(3, facture.getPrixTotal());
             pstmt.setString(4, facture.getTypePaiement());
             pstmt.setString(5, facture.getAdresseLivraison());
@@ -41,7 +45,7 @@ public class FactureService implements IService<Facture> {
 
         try (PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.setInt(1, facture.getCommande().getIdCommande()); // Utilisation de l'objet Commande
-            pstmt.setString(2, facture.getUtilisateur().getNom()); // Utilisation de l'objet Utilisateur
+            pstmt.setInt(2, facture.getUtilisateur().getIdUtilisateur()); // Correct, envoi l'ID de l'utilisateur
             pstmt.setFloat(3, facture.getPrixTotal());
             pstmt.setString(4, facture.getTypePaiement());
             pstmt.setString(5, facture.getAdresseLivraison());
@@ -64,13 +68,16 @@ public class FactureService implements IService<Facture> {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erreur lors de la suppression : " + e.getMessage());
+
+
+            
         }
     }
 
     @Override
     public List<Facture> display() {
         List<Facture> factures = new ArrayList<>();
-        String sql = "SELECT * FROM facture ";
+        String sql = "SELECT f.*, u.email, u.nom FROM facture f JOIN user u ON f.idUtilisateur = u.idUtilisateur";
 
         try (PreparedStatement pstmt = con.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
@@ -78,13 +85,16 @@ public class FactureService implements IService<Facture> {
             while (rs.next()) {
                 Facture facture = new Facture();
                 Commande commande = new Commande();
-                utilisateur user = new utilisateur();
+                Utilisateur user = new Utilisateur();
 
                 commande.setIdCommande(rs.getInt("idCommande"));
-                user.setId(rs.getInt("idUtilisateur"));
+                user.setIdUtilisateur(rs.getInt("idUtilisateur"));
+                user.setEmail(rs.getString("email"));  // Charger l'email de l'utilisateur
+                user.setNom(rs.getString("nom"));  // Charger le nom si nécessaire
+
                 facture.setIdFacture(rs.getInt("idFacture"));
                 facture.setCommande(commande);
-                facture.setUtilisateur(user);
+                facture.setUtilisateur(user); // Associer l'utilisateur à la facture
                 facture.setPrixTotal(rs.getFloat("prixTotal"));
                 facture.setTypePaiement(rs.getString("TypePaiement"));
                 facture.setAdresseLivraison(rs.getString("AdresseLivraison"));
@@ -99,7 +109,6 @@ public class FactureService implements IService<Facture> {
 
         return factures;
     }
-
 
     public List<Integer> getAllCommandes() {
         List<Integer> commandes = new ArrayList<>();
@@ -118,7 +127,7 @@ public class FactureService implements IService<Facture> {
 
     public List<Integer> getAllUtilisateurs() {
         List<Integer> utilisateurs = new ArrayList<>();
-        String query = "SELECT idUtilisateur FROM user";
+        String query = "SELECT * FROM user";
 
         try (PreparedStatement ps = con.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
@@ -130,4 +139,18 @@ public class FactureService implements IService<Facture> {
         }
         return utilisateurs;
     }
+
+    public Facture getFactureById(int id) {
+        for (model.Facture facture : display()) {
+            if (facture.getIdFacture() == id) {
+                return facture;
+            }
+        }
+        return null;
+    }
+
+
+
+
+
 }
